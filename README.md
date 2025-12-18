@@ -37,36 +37,113 @@ npm start
 
 ```
 b2b_next/
-├── components/          # Composants React réutilisables
-│   ├── Navbar.js        # Navigation avec sélecteur de langue
-│   ├── PremiumHero.js   # Hero section avec animations
-│   ├── Section.js       # Wrapper de section animé
-│   ├── ProductCard.js   # Carte produit avec effets hover
-│   ├── FeatureCard.js   # Carte fonctionnalité
-│   └── WebGLParticles.js # Arrière-plan particules 3D
-├── lib/
-│   └── i18n/            # Système d'internationalisation
-│       ├── translations.js   # Dictionnaire FR/EN
-│       ├── LanguageContext.js # Context React
-│       └── index.js
-├── pages/               # Routes Next.js
-│   ├── index.js         # Accueil
-│   ├── about.js         # À propos
-│   ├── services.js      # Services
-│   ├── contact.js       # Contact
-│   ├── blog.js          # Liste articles
-│   ├── projects.js      # Projets & études de cas
-│   ├── careers.js       # Carrières
-│   ├── legal.js         # Mentions légales
+├── components/              # Composants React réutilisables
+│   ├── layout/              # Composants de mise en page
+│   │   ├── Layout.js        # Layout principal avec Head, Navbar, Footer
+│   │   ├── Footer.js        # Pied de page
+│   │   └── index.js
+│   ├── ui/                  # Composants UI de base (Design System)
+│   │   ├── Button.js        # Bouton avec variantes
+│   │   ├── Input.js         # Champ de saisie
+│   │   ├── Card.js          # Carte avec variantes
+│   │   ├── Badge.js         # Badge/Tag
+│   │   ├── Icons.js         # Bibliothèque d'icônes SVG
+│   │   └── index.js
+│   ├── Navbar.js            # Navigation avec sélecteur de langue
+│   ├── PremiumHero.js       # Hero section avec animations
+│   ├── Section.js           # Wrapper de section animé
+│   ├── ProductCard.js       # Carte produit avec effets hover
+│   ├── FeatureCard.js       # Carte fonctionnalité
+│   └── WebGLParticles.js    # Arrière-plan particules 3D
+├── lib/                     # Logique métier et utilitaires
+│   ├── constants/           # Constantes globales
+│   │   └── index.js         # Config site, navigation, couleurs, animations
+│   ├── data/                # Données centralisées
+│   │   ├── products.js      # Catalogue produits
+│   │   ├── blog.js          # Articles de blog
+│   │   └── index.js
+│   ├── hooks/               # Hooks personnalisés
+│   │   ├── useViewport.js   # Détection taille écran
+│   │   ├── useScrollPosition.js # Position de scroll
+│   │   ├── useForm.js       # Gestion formulaires
+│   │   └── index.js
+│   ├── i18n/                # Système d'internationalisation
+│   │   ├── translations.js  # Dictionnaire FR/EN
+│   │   ├── LanguageContext.js # Context React avec persistence
+│   │   └── index.js
+│   └── index.js             # Export centralisé
+├── pages/                   # Routes Next.js
+│   ├── _app.js              # App wrapper
+│   ├── index.js             # Accueil
+│   ├── about.js             # À propos
+│   ├── services.js          # Services
+│   ├── contact.js           # Contact
+│   ├── blog.js              # Liste articles
+│   ├── projects.js          # Projets & études de cas
+│   ├── careers.js           # Carrières
+│   ├── legal.js             # Mentions légales
 │   ├── products/
-│   │   ├── index.js     # Catalogue produits
-│   │   └── [slug].js    # Détail produit
+│   │   ├── index.js         # Catalogue produits
+│   │   └── [slug].js        # Détail produit
 │   └── blog/
-│       └── [slug].js    # Détail article
+│       └── [slug].js        # Détail article
 ├── styles/
-│   └── globals.css      # Styles globaux & variables CSS
-├── tailwind.config.js   # Configuration Tailwind
-└── next.config.js       # Configuration Next.js
+│   └── globals.css          # Styles globaux & variables CSS
+├── .eslintrc.json           # Configuration ESLint
+├── jsconfig.json            # Alias de chemins (@/*)
+├── tailwind.config.js       # Configuration Tailwind
+├── next.config.js           # Configuration Next.js
+└── package.json
+```
+
+## 🏗️ Architecture & Bonnes Pratiques
+
+### Principes appliqués
+
+- **Separation of Concerns** : Logique (lib), UI (components), Pages (pages)
+- **DRY** : Composants UI réutilisables, constantes centralisées
+- **Single Responsibility** : Un composant = une responsabilité
+- **Composition over Inheritance** : Composants composables
+
+### Composants UI (Design System)
+
+```jsx
+import { Button, Input, Card, Badge } from '@/components/ui';
+
+// Boutons avec variantes
+<Button variant="primary" size="lg">Action</Button>
+<Button variant="outline" isLoading>Chargement</Button>
+
+// Cartes
+<Card variant="gradient" padding="lg">Contenu</Card>
+```
+
+### Hooks personnalisés
+
+```jsx
+import { useViewport, useScrollPosition, useForm } from "@/lib/hooks";
+
+// Détection responsive
+const { isMobile, isDesktop, breakpoint } = useViewport();
+
+// Position de scroll
+const { scrollY, direction, isScrolled } = useScrollPosition(50);
+
+// Gestion formulaire
+const { values, errors, handleChange, handleSubmit } = useForm(
+  initialValues,
+  onSubmit,
+  validate
+);
+```
+
+### Données centralisées
+
+```jsx
+import { getProductBySlug, getAllArticles } from "@/lib/data";
+
+const product = getProductBySlug("safety-shoes");
+const articles = getAllArticles();
 ```
 
 ## 🎨 Palette de Couleurs
