@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import WebGLParticles from '@/components/WebGLParticles';
 import Section from '@/components/Section';
+import Footer from '@/components/layout/Footer';
 import { useLanguage } from '@/lib/i18n';
 
 export default function ContactPage() {
@@ -228,6 +229,7 @@ export default function ContactPage() {
           </motion.div>
         </div>
       </Section>
+      <Footer />
     </div>
   );
 }

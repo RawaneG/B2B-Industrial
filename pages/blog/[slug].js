@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import WebGLParticles from '@/components/WebGLParticles';
 import Section from '@/components/Section';
+import Footer from '@/components/layout/Footer';
 import { useLanguage } from '@/lib/i18n';
 
 export default function BlogArticlePage() {
@@ -218,6 +219,7 @@ export default function BlogArticlePage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

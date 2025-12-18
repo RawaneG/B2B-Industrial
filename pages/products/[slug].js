@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import WebGLParticles from '@/components/WebGLParticles';
 import Section from '@/components/Section';
+import Footer from '@/components/layout/Footer';
 import { useLanguage } from '@/lib/i18n';
 
 export default function ProductDetailPage() {
@@ -222,6 +223,7 @@ export default function ProductDetailPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

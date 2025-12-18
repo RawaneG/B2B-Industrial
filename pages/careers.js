@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import WebGLParticles from '@/components/WebGLParticles';
 import Section from '@/components/Section';
+import Footer from '@/components/layout/Footer';
 import { useLanguage } from '@/lib/i18n';
 
 export default function CareersPage() {
@@ -238,6 +239,7 @@ export default function CareersPage() {
           </motion.a>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

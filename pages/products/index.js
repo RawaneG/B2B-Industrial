@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import WebGLParticles from '@/components/WebGLParticles';
 import Section from '@/components/Section';
+import Footer from '@/components/layout/Footer';
 import { useLanguage } from '@/lib/i18n';
 
 export default function ProductsPage() {
@@ -167,6 +168,7 @@ export default function ProductsPage() {
           </motion.a>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
