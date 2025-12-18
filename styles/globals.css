@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+/* Global styles for the industrial B2B brand. These classes establish a
+   consistent look and feel throughout the application. */
+
+:root {
+  --font-primary: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Color palette */
+  --color-primary: #d92c3a;
+  --color-primary-dark: #b82430;
+  --color-primary-light: #e85a65;
+  --color-secondary: #1f2937;
+  --color-secondary-light: #374151;
+  --color-accent: #f7a80d;
+  --color-accent-light: #fbbf24;
+  --color-neutral: #f8fafc;
+  --color-neutral-dark: #e2e8f0;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+body {
+  @apply bg-neutral text-secondary;
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  @apply font-bold tracking-tight;
+}
+
+h1 {
+  @apply text-4xl sm:text-5xl lg:text-6xl leading-tight;
+}
+
+h2 {
+  @apply text-3xl sm:text-4xl leading-tight;
+}
+
+h3 {
+  @apply text-xl sm:text-2xl leading-snug;
+}
+
+p {
+  @apply leading-relaxed;
+}
+
+/* Smooth scrolling for anchor navigation */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-neutral;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400;
+}
+
+/* Selection styling */
+::selection {
+  @apply bg-primary/20 text-primary;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  @apply outline-2 outline-offset-2 outline-primary;
+}
+
+/* Button base styles */
+.btn-primary {
+  @apply bg-primary hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+}
+
+.btn-secondary {
+  @apply bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300;
+}
+
+.btn-accent {
+  @apply bg-accent hover:bg-yellow-500 text-secondary font-semibold py-3 px-6 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg;
+}
+
+/* Card styles */
+.card {
+  @apply bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden;
+}
+
+.card-hover {
+  @apply hover:-translate-y-1 hover:shadow-xl;
+}
+
+/* Gradient text */
+.gradient-text {
+  @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent;
+}
+
+/* Input styles */
+.input-field {
+  @apply w-full p-4 rounded-xl border-2 border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-300 bg-white;
+}
+
+/* Section padding */
+.section-padding {
+  @apply py-20 lg:py-28;
+}
+
+/* Container max-width */
+.container-custom {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Animated underline */
+.animated-underline {
+  @apply relative;
+}
+
+.animated-underline::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+}
+
+.animated-underline:hover::after {
+  @apply w-full;
+}
+
+/* Glass effect */
+.glass {
+  @apply bg-white/80 backdrop-blur-md;
+}
+
+/* Subtle animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(217, 44, 58, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(217, 44, 58, 0.5); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
