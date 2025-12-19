@@ -1,11 +1,11 @@
-# B2B Solutions - Plateforme Industrielle
+# NOVITECH.sn - UNE NOUVELLE VISION DE LA TECHNOLOGIE
 
 ![Next.js](https://img.shields.io/badge/Next.js-16.0.10-black?logo=next.js)
 ![React](https://img.shields.io/badge/React-19.2.0-61DAFB?logo=react)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4.0-38B2AC?logo=tailwind-css)
 ![Framer Motion](https://img.shields.io/badge/Framer%20Motion-12.0.0-FF0055?logo=framer)
 
-Plateforme B2B moderne pour la fourniture d'équipements de protection individuelle (EPI) et de solutions électriques industrielles au Sénégal et en Afrique de l'Ouest.
+Plateforme NOVITECH.sn moderne pour la fourniture d'équipements de protection individuelle (EPI) et de solutions électriques industrielles au Sénégal et en Afrique de l'Ouest.
 
 ## 🌐 Fonctionnalités
 
@@ -190,7 +190,7 @@ function MyComponent() {
 
 ## 📄 Licence
 
-© 2024 B2B Solutions. Tous droits réservés.
+© 2024 NOVITECH.sn. Tous droits réservés.
 
 ---
 

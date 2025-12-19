@@ -12,7 +12,7 @@ export default function LegalPage() {
     <div className="relative min-h-screen bg-neutral">
       <GridPattern />
       <Navbar />
-      
+
       {/* Hero Section */}
       <div className="relative pt-32 pb-20 bg-gradient-to-b from-secondary to-secondary/95">
         <div className="container-custom text-center">
@@ -112,10 +112,10 @@ export default function LegalPage() {
               <div>
                 <h3 className="font-semibold text-secondary mb-3">{t('legal.editorTitle')}</h3>
                 <ul className="space-y-2 text-gray-600">
-                  <li><strong>{t('legal.editorCompany')}:</strong> B2B Solutions SARL</li>
-                  <li><strong>{t('legal.editorAddress')}:</strong> Dakar, Sénégal</li>
-                  <li><strong>NINEA:</strong> 12345678901234</li>
-                  <li><strong>RC:</strong> SN.DKR.2020.A.12345</li>
+                  <li><strong>{t('legal.editorCompany')}:</strong> NOVITECH.sn</li>
+                  <li><strong>{t('legal.editorAddress')}:</strong> Rufisque Est Arafat, Sénégal</li>
+                  <li><strong>NINEA:</strong> 006286216 SN DKR 2017 A 6640</li>
+                  <li><strong>N° Compte:</strong> 03723410007</li>
                 </ul>
               </div>
 

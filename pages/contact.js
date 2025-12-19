@@ -33,7 +33,7 @@ export default function ContactPage() {
         </svg>
       ),
       label: 'Email',
-      value: 'contact@b2b-solutions.com',
+      value: 'novitech@hotmail.fr',
     },
     {
       icon: (
@@ -42,7 +42,7 @@ export default function ContactPage() {
         </svg>
       ),
       label: t('contact.phoneLabel'),
-      value: '+221 78 000 00 00',
+      value: '+221 78 421 20 20',
     },
     {
       icon: (
@@ -52,7 +52,7 @@ export default function ContactPage() {
         </svg>
       ),
       label: t('contact.addressLabel'),
-      value: 'Dakar, Sénégal',
+      value: 'Rufisque Est Arafat, Sénégal',
     },
   ];
 
@@ -60,7 +60,7 @@ export default function ContactPage() {
     <div className="relative min-h-screen bg-neutral">
       <Waves />
       <Navbar />
-      
+
       {/* Hero Section */}
       <div className="relative pt-32 pb-20 bg-gradient-to-b from-secondary to-secondary/95">
         <div className="container-custom text-center">
@@ -105,7 +105,7 @@ export default function ContactPage() {
               <h2 className="text-2xl font-bold text-secondary mb-6">
                 {t('contact.formTitle').split(' ').slice(0, -1).join(' ')} <span className="text-primary">{t('contact.formTitle').split(' ').slice(-1)}</span>
               </h2>
-              
+
               <div className="space-y-6">
                 <div>
                   <label className="block text-secondary font-medium mb-2" htmlFor="name">
@@ -120,7 +120,7 @@ export default function ContactPage() {
                     placeholder={t('contact.namePlaceholder')}
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-secondary font-medium mb-2" htmlFor="email">
                     {t('contact.email')}
@@ -134,7 +134,7 @@ export default function ContactPage() {
                     placeholder={t('contact.emailPlaceholder')}
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-secondary font-medium mb-2" htmlFor="phone">
                     {t('contact.phone')}
@@ -148,7 +148,7 @@ export default function ContactPage() {
                     placeholder={t('contact.phonePlaceholder')}
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-secondary font-medium mb-2" htmlFor="message">
                     {t('contact.message')}
@@ -162,7 +162,7 @@ export default function ContactPage() {
                     placeholder={t('contact.messagePlaceholder')}
                   />
                 </div>
-                
+
                 <motion.button
                   type="submit"
                   whileHover={{ scale: 1.02 }}

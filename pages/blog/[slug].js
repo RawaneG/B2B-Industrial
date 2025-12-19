@@ -60,7 +60,7 @@ export default function BlogArticlePage() {
     <div className="relative min-h-screen bg-neutral">
       <Aurora />
       <Navbar />
-      
+
       {/* Hero Section */}
       <div className={`relative pt-32 pb-20 bg-gradient-to-br ${article?.color || 'from-primary to-accent'}`}>
         <div className="container-custom">
@@ -76,7 +76,7 @@ export default function BlogArticlePage() {
               {t('blog.backToBlog')}
             </Link>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -111,7 +111,7 @@ export default function BlogArticlePage() {
               <p className="text-gray-700 text-lg leading-relaxed mb-6">
                 {article ? t(article.contentKey) : ''}
               </p>
-              
+
               <h2 className="text-2xl font-bold text-secondary mt-8 mb-4">{t('blog.keyTakeaways')}</h2>
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-start gap-3">
@@ -139,14 +139,14 @@ export default function BlogArticlePage() {
                   <span>{t('blog.keyPoints.trainTeams')}</span>
                 </li>
               </ul>
-              
+
               <h2 className="text-2xl font-bold text-secondary mt-8 mb-4">{t('blog.conclusion')}</h2>
               <p className="text-gray-700 text-lg leading-relaxed">
                 {t('blog.conclusionText')}
               </p>
             </div>
           </motion.article>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -156,7 +156,7 @@ export default function BlogArticlePage() {
           >
             <div className="flex items-center gap-6">
               <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white text-2xl font-bold">
-                B2B
+                NV
               </div>
               <div>
                 <h3 className="text-xl font-bold text-secondary mb-1">{t('blog.authorTeam')}</h3>

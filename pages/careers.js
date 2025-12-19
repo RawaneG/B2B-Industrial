@@ -78,7 +78,7 @@ export default function CareersPage() {
     <div className="relative min-h-screen bg-neutral">
       <Waves />
       <Navbar />
-      
+
       {/* Hero Section */}
       <div className="relative pt-32 pb-20 bg-gradient-to-b from-secondary to-secondary/95">
         <div className="container-custom text-center">
@@ -164,7 +164,7 @@ export default function CareersPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                
+
                 {/* Content */}
                 <div className="flex-1">
                   <div className="flex flex-wrap gap-2 mb-2">
@@ -189,10 +189,10 @@ export default function CareersPage() {
                     {t(job.locationKey)}
                   </div>
                 </div>
-                
+
                 {/* Action */}
                 <motion.a
-                  href="mailto:hr@b2b-solutions.com"
+                  href="mailto:novitech@hotmail.fr"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-primary text-white py-3 px-6 rounded-xl font-semibold hover:bg-red-700 transition-all shadow-lg shadow-primary/30 whitespace-nowrap"
@@ -226,7 +226,7 @@ export default function CareersPage() {
             {t('careers.ctaDesc')}
           </motion.p>
           <motion.a
-            href="mailto:hr@b2b-solutions.com"
+            href="mailto:novitech@hotmail.fr"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
 
 /**
- * A responsive navigation bar for the B2B application with language switcher.
+ * A responsive navigation bar for the NOVITECH.sn application with language switcher.
  */
 export default function Navbar() {
   const { t, locale, switchLanguage, availableLocales } = useLanguage();
@@ -26,7 +26,7 @@ export default function Navbar() {
         <div className="flex items-center space-x-4">
           <Link href="/">
             <span className="text-white font-bold text-xl tracking-tight hover:text-primary transition-colors">
-              B2B <span className="text-primary">Solutions</span>
+              NOVITECH<span className="text-primary">.sn</span>
             </span>
           </Link>
         </div>
@@ -43,18 +43,17 @@ export default function Navbar() {
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-3/4 rounded-full" />
             </Link>
           ))}
-          
+
           {/* Language Switcher */}
           <div className="ml-4 flex items-center space-x-1 bg-white/10 rounded-full p-1">
             {availableLocales.map((lang) => (
               <button
                 key={lang}
                 onClick={() => switchLanguage(lang)}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 ${
-                  locale === lang
+                className={`px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 ${locale === lang
                     ? 'bg-primary text-white shadow-md'
                     : 'text-white/70 hover:text-white hover:bg-white/10'
-                }`}
+                  }`}
               >
                 {lang.toUpperCase()}
               </button>
@@ -98,7 +97,7 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              
+
               {/* Mobile Language Switcher */}
               <div className="flex items-center space-x-2 px-4 pt-4 border-t border-white/10 mt-4">
                 <span className="text-white/60 text-sm">{t('nav.language')}:</span>
@@ -109,11 +108,10 @@ export default function Navbar() {
                       switchLanguage(lang);
                       setIsMobileMenuOpen(false);
                     }}
-                    className={`px-4 py-2 text-sm font-semibold rounded-full transition-all ${
-                      locale === lang
+                    className={`px-4 py-2 text-sm font-semibold rounded-full transition-all ${locale === lang
                         ? 'bg-primary text-white'
                         : 'text-white/70 bg-white/10'
-                    }`}
+                      }`}
                   >
                     {lang.toUpperCase()}
                   </button>
