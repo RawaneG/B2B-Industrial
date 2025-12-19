@@ -16,25 +16,25 @@ export default function BlogArticlePage() {
     'choosing-right-ppe': {
       titleKey: 'blog.posts.choosingPpe.title',
       contentKey: 'blog.posts.choosingPpe.content',
-      category: 'EPI',
+      category: t('blog.categories.ppeCategory'),
       date: '15 Déc 2024',
-      readTime: '5 min',
+      readTime: '5',
       color: 'from-red-500 to-orange-500',
     },
     'electrical-safety-best-practices': {
       titleKey: 'blog.posts.electricalSafety.title',
       contentKey: 'blog.posts.electricalSafety.content',
-      category: 'Électrique',
+      category: t('blog.categories.electricalCategory'),
       date: '10 Déc 2024',
-      readTime: '7 min',
+      readTime: '7',
       color: 'from-blue-500 to-cyan-500',
     },
     'optimising-supply-chains': {
       titleKey: 'blog.posts.supplyChains.title',
       contentKey: 'blog.posts.supplyChains.content',
-      category: 'Logistique',
+      category: t('blog.categories.logisticsCategory'),
       date: '5 Déc 2024',
-      readTime: '6 min',
+      readTime: '6',
       color: 'from-green-500 to-emerald-500',
     },
   };
@@ -47,9 +47,9 @@ export default function BlogArticlePage() {
         <Aurora />
         <Navbar />
         <div className="pt-32 container-custom text-center">
-          <h1 className="text-4xl font-bold text-secondary mb-4">Article non trouvé</h1>
+          <h1 className="text-4xl font-bold text-secondary mb-4">{t('blog.articleNotFound')}</h1>
           <Link href="/blog" className="text-primary hover:underline">
-            ← Retour au blog
+            ← {t('blog.backToBlog')}
           </Link>
         </div>
       </div>
@@ -73,7 +73,7 @@ export default function BlogArticlePage() {
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
-              Retour au blog
+              {t('blog.backToBlog')}
             </Link>
           </motion.div>
           
@@ -92,7 +92,7 @@ export default function BlogArticlePage() {
             <div className="flex items-center gap-4 text-white/80">
               <span>{article?.date}</span>
               <span>•</span>
-              <span>{article?.readTime} de lecture</span>
+              <span>{article?.readTime} min {t('blog.readTime')}</span>
             </div>
           </motion.div>
         </div>
@@ -112,39 +112,37 @@ export default function BlogArticlePage() {
                 {article ? t(article.contentKey) : ''}
               </p>
               
-              <h2 className="text-2xl font-bold text-secondary mt-8 mb-4">Points clés à retenir</h2>
+              <h2 className="text-2xl font-bold text-secondary mt-8 mb-4">{t('blog.keyTakeaways')}</h2>
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-start gap-3">
                   <svg className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Évaluez systématiquement les risques avant de sélectionner l'équipement.</span>
+                  <span>{t('blog.keyPoints.assessRisks')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <svg className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Choisissez des produits certifiés conformes aux normes internationales.</span>
+                  <span>{t('blog.keyPoints.chooseCertified')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <svg className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Assurez-vous d'un ajustement correct et d'un entretien régulier.</span>
+                  <span>{t('blog.keyPoints.ensureFit')}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <svg className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span>Formez vos équipes à l'utilisation correcte des équipements.</span>
+                  <span>{t('blog.keyPoints.trainTeams')}</span>
                 </li>
               </ul>
               
-              <h2 className="text-2xl font-bold text-secondary mt-8 mb-4">Conclusion</h2>
+              <h2 className="text-2xl font-bold text-secondary mt-8 mb-4">{t('blog.conclusion')}</h2>
               <p className="text-gray-700 text-lg leading-relaxed">
-                La sécurité au travail ne doit jamais être compromise. En investissant dans des équipements de qualité
-                et en suivant les meilleures pratiques, vous protégez non seulement vos employés mais aussi votre entreprise.
-                N'hésitez pas à nous contacter pour des conseils personnalisés.
+                {t('blog.conclusionText')}
               </p>
             </div>
           </motion.article>
@@ -161,9 +159,9 @@ export default function BlogArticlePage() {
                 B2B
               </div>
               <div>
-                <h3 className="text-xl font-bold text-secondary mb-1">Équipe B2B Solutions</h3>
+                <h3 className="text-xl font-bold text-secondary mb-1">{t('blog.authorTeam')}</h3>
                 <p className="text-gray-600">
-                  Experts en équipements de protection et solutions industrielles depuis plus de 10 ans.
+                  {t('blog.authorBio')}
                 </p>
               </div>
             </div>
@@ -180,7 +178,7 @@ export default function BlogArticlePage() {
             viewport={{ once: true }}
             className="text-3xl sm:text-4xl font-bold text-white mb-6"
           >
-            Envie d'en <span className="text-primary">savoir plus</span> ?
+            {t('blog.ctaTitle').split(' ').slice(0, -1).join(' ')} <span className="text-primary">{t('blog.ctaTitle').split(' ').slice(-1)}</span> ?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -189,7 +187,7 @@ export default function BlogArticlePage() {
             transition={{ delay: 0.1 }}
             className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto"
           >
-            Découvrez nos autres articles et restez informé des dernières actualités du secteur.
+            {t('blog.ctaDesc')}
           </motion.p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.a
@@ -202,7 +200,7 @@ export default function BlogArticlePage() {
               whileTap={{ scale: 0.95 }}
               className="inline-block bg-primary text-white py-4 px-10 rounded-full font-semibold text-lg hover:bg-red-700 transition-all shadow-lg shadow-primary/30"
             >
-              Voir tous les articles
+              {t('blog.allArticles')}
             </motion.a>
             <motion.a
               href="/contact"

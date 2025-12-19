@@ -232,7 +232,7 @@ export default function PremiumHero({
             />
             <AnimatedText
               text={t('hero.title2') || 'Performance'}
-              className="block mt-2"
+              className="block mt-6"
               delay={0.8}
               as={GradientText}
             />
