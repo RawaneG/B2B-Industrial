@@ -17,7 +17,7 @@ const AnimatedText = ({
   const letters = text.split('');
 
   return (
-    <Tag className={`inline-flex flex-wrap ${className}`}>
+    <Tag className={`inline-flex flex-wrap justify-center ${className}`}>
       {letters.map((letter, index) => (
         <motion.span
           key={index}
@@ -224,15 +224,15 @@ export default function PremiumHero({
           )}
 
           {/* Main Heading */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-[1.1]">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-[1.1] text-center">
             <AnimatedText
               text={t('hero.title1') || 'Propulsez votre'}
-              className="text-white block"
+              className="text-white block w-full"
               delay={0.3}
             />
             <AnimatedText
               text={t('hero.title2') || 'Performance'}
-              className="block mt-6"
+              className="block mt-10 w-full"
               delay={0.8}
               as={GradientText}
             />

@@ -66,7 +66,7 @@ export default function PremiumHero() {
           className="text-5xl sm:text-7xl lg:text-8xl font-bold mb-6 text-white leading-tight"
         >
           <span className="block">{t('hero.title1')}</span>
-          <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+          <span className="block mt-4 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
             {t('hero.title2')}
           </span>
         </motion.h1>
