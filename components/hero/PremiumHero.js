@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/i18n';
+import { LightPillar } from '@/components/backgrounds';
 
 /**
  * Animated Text Component - Letter by letter animation
@@ -200,10 +201,25 @@ export default function PremiumHero({
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Light Pillar Background */}
+      <div className="absolute inset-0 z-0">
+        <LightPillar
+          topColor="#D92C3A"
+          bottomColor="#FF6B7A"
+          intensity={0.8}
+          rotationSpeed={0.2}
+          glowAmount={0.008}
+          pillarWidth={2.5}
+          pillarHeight={0.5}
+          noiseIntensity={0.3}
+          mixBlendMode="screen"
+        />
+      </div>
+
       {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black/80 z-0" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] animate-pulse" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-[128px] animate-pulse" style={{ animationDelay: '1s' }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70 z-[1]" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[128px] animate-pulse z-[1]" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-[128px] animate-pulse z-[1]" style={{ animationDelay: '1s' }} />
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">

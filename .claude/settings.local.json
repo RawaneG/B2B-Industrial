@@ -14,7 +14,11 @@
       "Bash(git pull:*)",
       "Bash(npm run dev:*)",
       "Bash(timeout /t 5 /nobreak)",
-      "Bash(exit 0)"
+      "Bash(exit 0)",
+      "Bash(dir:*)",
+      "Bash(findstr:*)",
+      "Bash(curl:*)",
+      "Bash(cat:*)"
     ]
   }
 }
