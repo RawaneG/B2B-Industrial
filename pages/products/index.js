@@ -143,7 +143,7 @@ export default function ProductsPage() {
             viewport={{ once: true }}
             className="text-3xl sm:text-4xl font-bold text-white mb-6"
           >
-            Besoin d'un <span className="text-primary">devis personnalisé</span> ?
+            {t('productDetails.customQuoteTitle').split(' ').slice(0, -2).join(' ')} <span className="text-primary">{t('productDetails.customQuoteTitle').split(' ').slice(-2).join(' ')}</span> ?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -152,7 +152,7 @@ export default function ProductsPage() {
             transition={{ delay: 0.1 }}
             className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto"
           >
-            Notre équipe est à votre disposition pour vous accompagner dans le choix de vos équipements.
+            {t('productDetails.customQuoteDesc')}
           </motion.p>
           <motion.a
             href="/contact"

@@ -13,24 +13,24 @@ export default function CareersPage() {
       titleKey: 'careers.jobs.salesManager.title',
       locationKey: 'careers.jobs.salesManager.location',
       descriptionKey: 'careers.jobs.salesManager.description',
-      type: 'CDI',
-      department: 'Commercial',
+      type: t('careers.jobTypes.cdi'),
+      department: t('careers.departments.sales'),
       color: 'from-red-500 to-orange-500',
     },
     {
       titleKey: 'careers.jobs.electricalEngineer.title',
       locationKey: 'careers.jobs.electricalEngineer.location',
       descriptionKey: 'careers.jobs.electricalEngineer.description',
-      type: 'CDI',
-      department: 'Technique',
+      type: t('careers.jobTypes.cdi'),
+      department: t('careers.departments.technical'),
       color: 'from-blue-500 to-cyan-500',
     },
     {
       titleKey: 'careers.jobs.warehouseSupervisor.title',
       locationKey: 'careers.jobs.warehouseSupervisor.location',
       descriptionKey: 'careers.jobs.warehouseSupervisor.description',
-      type: 'CDI',
-      department: 'Logistique',
+      type: t('careers.jobTypes.cdi'),
+      department: t('careers.departments.logistics'),
       color: 'from-green-500 to-emerald-500',
     },
   ];
@@ -42,8 +42,8 @@ export default function CareersPage() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       ),
-      title: 'Rémunération attractive',
-      description: 'Salaire compétitif et primes de performance.',
+      title: t('careers.benefits.salary.title'),
+      description: t('careers.benefits.salary.description'),
     },
     {
       icon: (
@@ -51,8 +51,8 @@ export default function CareersPage() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
         </svg>
       ),
-      title: 'Évolution de carrière',
-      description: 'Opportunités de développement professionnel.',
+      title: t('careers.benefits.growth.title'),
+      description: t('careers.benefits.growth.description'),
     },
     {
       icon: (
@@ -60,8 +60,8 @@ export default function CareersPage() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
         </svg>
       ),
-      title: 'Équipe dynamique',
-      description: 'Environnement de travail collaboratif.',
+      title: t('careers.benefits.team.title'),
+      description: t('careers.benefits.team.description'),
     },
     {
       icon: (
@@ -69,8 +69,8 @@ export default function CareersPage() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
         </svg>
       ),
-      title: 'Formation continue',
-      description: 'Programmes de formation et certifications.',
+      title: t('careers.benefits.training.title'),
+      description: t('careers.benefits.training.description'),
     },
   ];
 
@@ -88,7 +88,7 @@ export default function CareersPage() {
             transition={{ duration: 0.5 }}
             className="inline-block px-4 py-2 bg-primary/10 border border-primary/30 rounded-full text-primary text-sm font-medium tracking-wider mb-6"
           >
-            CARRIÈRES
+            {t('careers.badge')}
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -118,7 +118,7 @@ export default function CareersPage() {
             viewport={{ once: true }}
             className="text-2xl font-bold text-secondary text-center mb-12"
           >
-            Pourquoi nous <span className="text-primary">rejoindre</span> ?
+            {t('careers.benefitsTitle').split(' ').slice(0, -1).join(' ')} <span className="text-primary">{t('careers.benefitsTitle').split(' ').slice(-1)}</span> ?
           </motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {benefits.map((benefit, index) => (
@@ -144,8 +144,8 @@ export default function CareersPage() {
       {/* Jobs Section */}
       <Section
         id="jobs"
-        title="Postes Ouverts"
-        description="Découvrez nos opportunités de carrière actuelles."
+        title={t('careers.jobsTitle')}
+        description={t('careers.jobsDesc')}
       >
         <div className="space-y-6">
           {jobs.map((job, index) => (
@@ -214,7 +214,7 @@ export default function CareersPage() {
             viewport={{ once: true }}
             className="text-3xl sm:text-4xl font-bold text-white mb-6"
           >
-            Aucun poste ne vous <span className="text-primary">correspond</span> ?
+            {t('careers.ctaTitle').split(' ').slice(0, -1).join(' ')} <span className="text-primary">{t('careers.ctaTitle').split(' ').slice(-1)}</span> ?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -223,7 +223,7 @@ export default function CareersPage() {
             transition={{ delay: 0.1 }}
             className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto"
           >
-            Envoyez-nous une candidature spontanée. Nous sommes toujours à la recherche de talents.
+            {t('careers.ctaDesc')}
           </motion.p>
           <motion.a
             href="mailto:hr@b2b-solutions.com"
@@ -235,7 +235,7 @@ export default function CareersPage() {
             whileTap={{ scale: 0.95 }}
             className="inline-block bg-white text-secondary py-4 px-10 rounded-full font-semibold text-lg hover:bg-gray-100 transition-all shadow-lg"
           >
-            Candidature spontanée
+            {t('careers.spontaneousBtn')}
           </motion.a>
         </div>
       </div>

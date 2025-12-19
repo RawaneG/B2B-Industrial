@@ -93,7 +93,7 @@ export default function ProductDetailPage() {
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
-              {t('common.back')} aux produits
+              {t('common.back')} {t('productDetails.backToProducts')}
             </Link>
           </motion.div>
           
@@ -143,7 +143,7 @@ export default function ProductDetailPage() {
       <Section
         id="specifications"
         title={t('productDetails.specifications')}
-        description="Détails techniques et caractéristiques du produit."
+        description={t('productDetails.specsDesc')}
       >
         <div className="max-w-3xl mx-auto">
           <motion.div
@@ -184,7 +184,7 @@ export default function ProductDetailPage() {
             viewport={{ once: true }}
             className="text-3xl sm:text-4xl font-bold text-secondary mb-6"
           >
-            Intéressé par ce <span className="text-primary">produit</span> ?
+            {t('productDetails.interestedTitle').split(' ').slice(0, -1).join(' ')} <span className="text-primary">{t('productDetails.interestedTitle').split(' ').slice(-1)}</span> ?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -193,7 +193,7 @@ export default function ProductDetailPage() {
             transition={{ delay: 0.1 }}
             className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto"
           >
-            Contactez-nous pour obtenir un devis personnalisé ou pour plus d'informations.
+            {t('productDetails.interestedDesc')}
           </motion.p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.a
@@ -218,7 +218,7 @@ export default function ProductDetailPage() {
               whileTap={{ scale: 0.95 }}
               className="inline-block bg-white border-2 border-primary text-primary py-4 px-10 rounded-full font-semibold text-lg hover:bg-primary hover:text-white transition-all"
             >
-              Voir tous les produits
+              {t('productDetails.viewAllProducts')}
             </motion.a>
           </div>
         </div>

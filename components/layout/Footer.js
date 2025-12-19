@@ -13,14 +13,14 @@ export default function Footer() {
 
   const footerLinks = [
     {
-      title: 'Navigation',
+      title: t('footer.navigation'),
       links: NAV_LINKS.slice(0, 4).map(link => ({
         label: t(`nav.${link.key}`),
         href: link.href,
       })),
     },
     {
-      title: 'Ressources',
+      title: t('footer.resources'),
       links: [
         { label: t('nav.blog'), href: '/blog' },
         { label: t('nav.projects'), href: '/projects' },
@@ -117,14 +117,14 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-400 text-sm">
-            © {currentYear} B2B Solutions. Tous droits réservés.
+            © {currentYear} B2B Solutions. {t('footer.allRightsReserved')}
           </p>
           <div className="flex gap-6 text-sm">
             <Link href="/legal" className="text-gray-400 hover:text-primary transition-colors">
               {t('nav.legal')}
             </Link>
             <Link href="/legal#privacy" className="text-gray-400 hover:text-primary transition-colors">
-              Confidentialité
+              {t('footer.privacy')}
             </Link>
           </div>
         </div>

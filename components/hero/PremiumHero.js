@@ -7,15 +7,15 @@ import { useLanguage } from '@/lib/i18n';
  * Animated Text Component - Letter by letter animation
  * Inspired by ReactBits.dev Split Text
  */
-const AnimatedText = ({ 
-  text, 
-  className = '', 
-  delay = 0, 
+const AnimatedText = ({
+  text,
+  className = '',
+  delay = 0,
   staggerDelay = 0.03,
   as: Tag = 'span',
 }) => {
   const letters = text.split('');
-  
+
   return (
     <Tag className={`inline-flex flex-wrap ${className}`}>
       {letters.map((letter, index) => (
@@ -29,7 +29,7 @@ const AnimatedText = ({
             ease: [0.215, 0.61, 0.355, 1],
           }}
           className="inline-block"
-          style={{ 
+          style={{
             transformOrigin: 'bottom',
             whiteSpace: letter === ' ' ? 'pre' : 'normal',
           }}
@@ -45,7 +45,7 @@ const AnimatedText = ({
  * Gradient Text with Animation
  */
 const GradientText = ({ children, className = '' }) => (
-  <span 
+  <span
     className={`bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_auto] animate-gradient-x bg-clip-text text-transparent ${className}`}
   >
     {children}
@@ -77,10 +77,10 @@ const MagneticButton = ({ children, href, variant = 'primary', className = '' })
   const handleMouseMove = (e) => {
     const rect = buttonRef.current?.getBoundingClientRect();
     if (!rect) return;
-    
+
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
-    
+
     setPosition({ x: x * 0.15, y: y * 0.15 });
   };
 
@@ -186,7 +186,7 @@ const StatCounter = ({ value, label, suffix = '', delay = 0 }) => {
  * Premium Hero Component - Inspired by ReactBits.dev
  * Features: Animated text, magnetic buttons, floating badges, gradient effects
  */
-export default function PremiumHero({ 
+export default function PremiumHero({
   variant = 'default', // 'default', 'minimal', 'centered'
   showStats = true,
   showBadge = true,
@@ -208,10 +208,10 @@ export default function PremiumHero({
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">
         <div className={`${variant === 'centered' ? 'text-center' : ''}`}>
-          
+
           {/* Badge */}
           {showBadge && (
-            <motion.div 
+            <motion.div
               className={`mb-8 ${variant === 'centered' ? '' : ''}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -225,12 +225,12 @@ export default function PremiumHero({
 
           {/* Main Heading */}
           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-[1.1]">
-            <AnimatedText 
+            <AnimatedText
               text={t('hero.title1') || 'Propulsez votre'}
               className="text-white block"
               delay={0.3}
             />
-            <AnimatedText 
+            <AnimatedText
               text={t('hero.title2') || 'Performance'}
               className="block mt-2"
               delay={0.8}

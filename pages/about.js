@@ -9,10 +9,10 @@ export default function AboutPage() {
   const { t } = useLanguage();
 
   const stats = [
-    { value: '10+', label: 'Années d\'expérience' },
-    { value: '500+', label: 'Clients satisfaits' },
-    { value: '1000+', label: 'Produits livrés' },
-    { value: '24/7', label: 'Support technique' },
+    { value: '10+', label: t('about.stats.experience') },
+    { value: '500+', label: t('about.stats.clients') },
+    { value: '1000+', label: t('about.stats.delivered') },
+    { value: '24/7', label: t('about.stats.support') },
   ];
 
   const values = [
@@ -22,8 +22,8 @@ export default function AboutPage() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
         </svg>
       ),
-      title: 'Sécurité',
-      description: 'La sécurité de vos équipes est notre priorité absolue.',
+      title: t('about.values.safety.title'),
+      description: t('about.values.safety.description'),
     },
     {
       icon: (
@@ -31,8 +31,8 @@ export default function AboutPage() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
         </svg>
       ),
-      title: 'Qualité',
-      description: 'Des produits certifiés répondant aux normes les plus strictes.',
+      title: t('about.values.quality.title'),
+      description: t('about.values.quality.description'),
     },
     {
       icon: (
@@ -40,8 +40,8 @@ export default function AboutPage() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
         </svg>
       ),
-      title: 'Partenariat',
-      description: 'Un accompagnement personnalisé pour chaque client.',
+      title: t('about.values.partnership.title'),
+      description: t('about.values.partnership.description'),
     },
     {
       icon: (
@@ -49,8 +49,8 @@ export default function AboutPage() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
       ),
-      title: 'Innovation',
-      description: 'Des solutions modernes pour répondre aux défis d\'aujourd\'hui.',
+      title: t('about.values.innovation.title'),
+      description: t('about.values.innovation.description'),
     },
   ];
 
@@ -120,7 +120,7 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl font-bold text-secondary mb-6">
-              Notre <span className="text-primary">Mission</span>
+              {t('about.mission').split(' ')[0]} <span className="text-primary">{t('about.mission').split(' ')[1]}</span>
             </h2>
             <p className="text-gray-600 text-lg leading-relaxed mb-6">
               {t('about.content')}
@@ -157,8 +157,8 @@ export default function AboutPage() {
       <div className="bg-gradient-to-br from-gray-50 to-white">
         <Section
           id="values"
-          title="Nos Valeurs"
-          description="Les principes qui guident notre travail au quotidien."
+          title={t('about.valuesTitle')}
+          description={t('about.valuesDesc')}
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (

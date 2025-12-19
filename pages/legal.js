@@ -22,7 +22,7 @@ export default function LegalPage() {
             transition={{ duration: 0.5 }}
             className="inline-block px-4 py-2 bg-primary/10 border border-primary/30 rounded-full text-primary text-sm font-medium tracking-wider mb-6"
           >
-            LÉGAL
+            {t('legal.badge')}
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -105,32 +105,32 @@ export default function LegalPage() {
             className="bg-gradient-to-br from-primary/5 to-accent/5 rounded-3xl p-8 md:p-12"
           >
             <h2 className="text-2xl font-bold text-secondary mb-6">
-              Informations <span className="text-primary">Complémentaires</span>
+              {t('legal.additionalInfoTitle').split(' ')[0]} <span className="text-primary">{t('legal.additionalInfoTitle').split(' ')[1]}</span>
             </h2>
-            
+
             <div className="grid md:grid-cols-2 gap-8">
               <div>
-                <h3 className="font-semibold text-secondary mb-3">Éditeur du site</h3>
+                <h3 className="font-semibold text-secondary mb-3">{t('legal.editorTitle')}</h3>
                 <ul className="space-y-2 text-gray-600">
-                  <li><strong>Raison sociale:</strong> B2B Solutions SARL</li>
-                  <li><strong>Siège social:</strong> Dakar, Sénégal</li>
+                  <li><strong>{t('legal.editorCompany')}:</strong> B2B Solutions SARL</li>
+                  <li><strong>{t('legal.editorAddress')}:</strong> Dakar, Sénégal</li>
                   <li><strong>NINEA:</strong> 12345678901234</li>
                   <li><strong>RC:</strong> SN.DKR.2020.A.12345</li>
                 </ul>
               </div>
-              
+
               <div>
-                <h3 className="font-semibold text-secondary mb-3">Hébergement</h3>
+                <h3 className="font-semibold text-secondary mb-3">{t('legal.hostingTitle')}</h3>
                 <ul className="space-y-2 text-gray-600">
-                  <li><strong>Hébergeur:</strong> Vercel Inc.</li>
-                  <li><strong>Adresse:</strong> San Francisco, CA, USA</li>
+                  <li><strong>{t('legal.hostingProvider')}:</strong> Vercel Inc.</li>
+                  <li><strong>{t('legal.hostingAddress')}:</strong> San Francisco, CA, USA</li>
                 </ul>
               </div>
             </div>
-            
+
             <div className="mt-8 pt-8 border-t border-gray-200">
               <p className="text-gray-600 text-sm">
-                Dernière mise à jour : Décembre 2024
+                {t('legal.lastUpdate')} : Décembre 2024
               </p>
             </div>
           </motion.div>

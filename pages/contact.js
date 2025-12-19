@@ -41,7 +41,7 @@ export default function ContactPage() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
         </svg>
       ),
-      label: 'Téléphone',
+      label: t('contact.phoneLabel'),
       value: '+221 78 000 00 00',
     },
     {
@@ -51,7 +51,7 @@ export default function ContactPage() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
       ),
-      label: 'Adresse',
+      label: t('contact.addressLabel'),
       value: 'Dakar, Sénégal',
     },
   ];
@@ -103,7 +103,7 @@ export default function ContactPage() {
           >
             <form onSubmit={handleSubmit} className="bg-white rounded-3xl p-8 shadow-xl">
               <h2 className="text-2xl font-bold text-secondary mb-6">
-                Envoyez-nous un <span className="text-primary">message</span>
+                {t('contact.formTitle').split(' ').slice(0, -1).join(' ')} <span className="text-primary">{t('contact.formTitle').split(' ').slice(-1)}</span>
               </h2>
               
               <div className="space-y-6">
@@ -185,10 +185,10 @@ export default function ContactPage() {
           >
             <div>
               <h2 className="text-2xl font-bold text-secondary mb-4">
-                Informations de <span className="text-primary">contact</span>
+                {t('contact.infoTitle').split(' ').slice(0, -1).join(' ')} <span className="text-primary">{t('contact.infoTitle').split(' ').slice(-1)}</span>
               </h2>
               <p className="text-gray-600 mb-8">
-                N'hésitez pas à nous contacter pour toute question ou demande de devis.
+                {t('contact.infoDesc')}
               </p>
             </div>
 
@@ -223,7 +223,7 @@ export default function ContactPage() {
                 <svg className="w-16 h-16 text-primary/50 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                 </svg>
-                <p className="text-gray-500">Carte interactive</p>
+                <p className="text-gray-500">{t('contact.mapPlaceholder')}</p>
               </div>
             </motion.div>
           </motion.div>

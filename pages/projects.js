@@ -13,7 +13,7 @@ export default function ProjectsPage() {
       titleKey: 'projects.project1.title',
       descriptionKey: 'projects.project1.description',
       image: 'industrial',
-      category: 'Industrie',
+      category: t('projects.categories.industry'),
       year: '2024',
       color: 'from-red-500 to-orange-500',
     },
@@ -21,7 +21,7 @@ export default function ProjectsPage() {
       titleKey: 'projects.project2.title',
       descriptionKey: 'projects.project2.description',
       image: 'construction',
-      category: 'Construction',
+      category: t('projects.categories.construction'),
       year: '2024',
       color: 'from-blue-500 to-cyan-500',
     },
@@ -29,17 +29,17 @@ export default function ProjectsPage() {
       titleKey: 'projects.project3.title',
       descriptionKey: 'projects.project3.description',
       image: 'oil-gas',
-      category: 'Pétrole & Gaz',
+      category: t('projects.categories.oilGas'),
       year: '2023',
       color: 'from-green-500 to-emerald-500',
     },
   ];
 
   const stats = [
-    { value: '50+', label: 'Projets réalisés' },
-    { value: '30+', label: 'Clients industriels' },
-    { value: '100%', label: 'Satisfaction client' },
-    { value: '15+', label: 'Secteurs couverts' },
+    { value: '50+', label: t('projects.stats.projectsCompleted') },
+    { value: '30+', label: t('projects.stats.industrialClients') },
+    { value: '100%', label: t('projects.stats.clientSatisfaction') },
+    { value: '15+', label: t('projects.stats.sectorsCovered') },
   ];
 
   return (
@@ -140,7 +140,7 @@ export default function ProjectsPage() {
                     whileHover={{ x: 5 }}
                     className="flex items-center text-primary font-semibold group-hover:text-accent transition-colors"
                   >
-                    <span>En savoir plus</span>
+                    <span>{t('projects.learnMore')}</span>
                     <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
@@ -161,7 +161,7 @@ export default function ProjectsPage() {
             viewport={{ once: true }}
             className="text-3xl sm:text-4xl font-bold text-secondary mb-6"
           >
-            Vous avez un <span className="text-primary">projet</span> ?
+            {t('projects.ctaTitle').split(' ').slice(0, -1).join(' ')} <span className="text-primary">{t('projects.ctaTitle').split(' ').slice(-1)}</span> ?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -170,7 +170,7 @@ export default function ProjectsPage() {
             transition={{ delay: 0.1 }}
             className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto"
           >
-            Discutons de vos besoins et découvrez comment nous pouvons vous accompagner.
+            {t('projects.ctaDesc')}
           </motion.p>
           <motion.a
             href="/contact"

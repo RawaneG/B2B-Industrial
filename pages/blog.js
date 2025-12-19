@@ -14,27 +14,27 @@ export default function BlogPage() {
       slug: 'choosing-right-ppe',
       titleKey: 'blog.posts.choosingPpe.title',
       excerptKey: 'blog.posts.choosingPpe.excerpt',
-      category: 'EPI',
+      category: t('blog.categories.ppeCategory'),
       date: '15 Déc 2024',
-      readTime: '5 min',
+      readTime: '5',
       color: 'from-red-500 to-orange-500',
     },
     {
       slug: 'electrical-safety-best-practices',
       titleKey: 'blog.posts.electricalSafety.title',
       excerptKey: 'blog.posts.electricalSafety.excerpt',
-      category: 'Électrique',
+      category: t('blog.categories.electricalCategory'),
       date: '10 Déc 2024',
-      readTime: '7 min',
+      readTime: '7',
       color: 'from-blue-500 to-cyan-500',
     },
     {
       slug: 'optimising-supply-chains',
       titleKey: 'blog.posts.supplyChains.title',
       excerptKey: 'blog.posts.supplyChains.excerpt',
-      category: 'Logistique',
+      category: t('blog.categories.logisticsCategory'),
       date: '5 Déc 2024',
-      readTime: '6 min',
+      readTime: '6',
       color: 'from-green-500 to-emerald-500',
     },
   ];
@@ -106,7 +106,7 @@ export default function BlogPage() {
                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
                       <span>{post.date}</span>
                       <span>•</span>
-                      <span>{post.readTime} de lecture</span>
+                      <span>{post.readTime} min {t('blog.readTime')}</span>
                     </div>
                     
                     <h3 className="text-xl font-bold text-secondary mb-3 group-hover:text-primary transition-colors">
@@ -140,7 +140,7 @@ export default function BlogPage() {
             viewport={{ once: true }}
             className="text-3xl sm:text-4xl font-bold text-white mb-6"
           >
-            Restez <span className="text-primary">informé</span>
+            {t('blog.newsletterTitle').split(' ')[0]} <span className="text-primary">{t('blog.newsletterTitle').split(' ')[1]}</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -149,7 +149,7 @@ export default function BlogPage() {
             transition={{ delay: 0.1 }}
             className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto"
           >
-            Inscrivez-vous à notre newsletter pour recevoir nos derniers articles et actualités.
+            {t('blog.newsletterDesc')}
           </motion.p>
           <motion.form
             initial={{ opacity: 0, y: 20 }}
@@ -160,7 +160,7 @@ export default function BlogPage() {
           >
             <input
               type="email"
-              placeholder="Votre adresse email"
+              placeholder={t('blog.emailPlaceholder')}
               className="flex-1 px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:border-primary"
             />
             <motion.button
@@ -169,7 +169,7 @@ export default function BlogPage() {
               whileTap={{ scale: 0.95 }}
               className="bg-primary text-white py-4 px-8 rounded-full font-semibold hover:bg-red-700 transition-all"
             >
-              S'inscrire
+              {t('blog.subscribeBtn')}
             </motion.button>
           </motion.form>
         </div>

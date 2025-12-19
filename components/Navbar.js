@@ -101,7 +101,7 @@ export default function Navbar() {
               
               {/* Mobile Language Switcher */}
               <div className="flex items-center space-x-2 px-4 pt-4 border-t border-white/10 mt-4">
-                <span className="text-white/60 text-sm">Langue:</span>
+                <span className="text-white/60 text-sm">{t('nav.language')}:</span>
                 {availableLocales.map((lang) => (
                   <button
                     key={lang}
