@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
-import WebGLParticles from '@/components/WebGLParticles';
+import { GridPattern } from '@/components/backgrounds';
 import Section from '@/components/Section';
 import Footer from '@/components/layout/Footer';
 import { useLanguage } from '@/lib/i18n';
@@ -62,7 +62,7 @@ export default function ProductDetailPage() {
   if (!product && slug) {
     return (
       <div className="relative min-h-screen bg-neutral">
-        <WebGLParticles />
+        <GridPattern />
         <Navbar />
         <div className="pt-32 container-custom text-center">
           <h1 className="text-4xl font-bold text-secondary mb-4">{t('productDetails.notFound')}</h1>
@@ -78,7 +78,7 @@ export default function ProductDetailPage() {
 
   return (
     <div className="relative min-h-screen bg-neutral">
-      <WebGLParticles />
+      <GridPattern />
       <Navbar />
       
       {/* Hero Section */}

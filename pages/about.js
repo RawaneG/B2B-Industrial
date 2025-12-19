@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
-import WebGLParticles from '@/components/WebGLParticles';
+import { Aurora } from '@/components/backgrounds';
 import Section from '@/components/Section';
 import Footer from '@/components/layout/Footer';
 import { useLanguage } from '@/lib/i18n';
@@ -56,7 +56,7 @@ export default function AboutPage() {
 
   return (
     <div className="relative min-h-screen bg-neutral">
-      <WebGLParticles />
+      <Aurora />
       <Navbar />
       
       {/* Hero Section */}

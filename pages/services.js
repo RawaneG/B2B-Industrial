@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
-import WebGLParticles from '@/components/WebGLParticles';
+import { GridPattern } from '@/components/backgrounds';
 import Section from '@/components/Section';
 import Footer from '@/components/layout/Footer';
 import { useLanguage } from '@/lib/i18n';
@@ -53,7 +53,7 @@ export default function ServicesPage() {
 
   return (
     <div className="relative min-h-screen bg-neutral">
-      <WebGLParticles />
+      <GridPattern />
       <Navbar />
       
       {/* Hero Section */}

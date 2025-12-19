@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
-import WebGLParticles from '@/components/WebGLParticles';
+import { Aurora } from '@/components/backgrounds';
 import Section from '@/components/Section';
 import Footer from '@/components/layout/Footer';
 import { useLanguage } from '@/lib/i18n';
@@ -44,7 +44,7 @@ export default function BlogArticlePage() {
   if (!article && slug) {
     return (
       <div className="relative min-h-screen bg-neutral">
-        <WebGLParticles />
+        <Aurora />
         <Navbar />
         <div className="pt-32 container-custom text-center">
           <h1 className="text-4xl font-bold text-secondary mb-4">Article non trouvé</h1>
@@ -58,7 +58,7 @@ export default function BlogArticlePage() {
 
   return (
     <div className="relative min-h-screen bg-neutral">
-      <WebGLParticles />
+      <Aurora />
       <Navbar />
       
       {/* Hero Section */}
