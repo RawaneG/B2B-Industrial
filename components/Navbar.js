@@ -25,7 +25,7 @@ export default memo(function Navbar() {
   );
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-white/5 backdrop-blur-xl z-50 border-b border-white shadow-lg shadow-black/10">
+    <nav className="fixed top-0 left-0 w-full bg-black/40 backdrop-blur-xl z-50 border-b border-white/20 shadow-lg shadow-black/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center space-x-4">
@@ -89,7 +89,7 @@ export default memo(function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white/5 backdrop-blur-xl border-t border-white"
+            className="md:hidden bg-black/40 backdrop-blur-xl border-t border-white/20"
           >
             <div className="px-4 py-4 space-y-2">
               {navLinks.map((link) => (
