@@ -1,26 +1,37 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/i18n';
+import { useMemo } from 'react';
 
 /**
  * Premium Hero with progressive reveal animations
  * Inspired by high-end portfolio sites with layered content emergence
+ * OPTIMIZED: Reduced scroll range, memoized transforms, will-change CSS
  */
 export default function PremiumHero() {
   const { scrollY } = useScroll();
   const { t } = useLanguage();
 
-  // Parallax effects based on scroll
-  const y1 = useTransform(scrollY, [0, 500], [0, 150]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
-  const scale = useTransform(scrollY, [0, 500], [1, 1.2]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  // Parallax effects based on scroll - OPTIMIZED: Reduced range from 500 to 300
+  const y1 = useTransform(scrollY, [0, 300], [0, 100]);
+  const y2 = useTransform(scrollY, [0, 300], [0, -100]);
+  const scale = useTransform(scrollY, [0, 300], [1, 1.15]);
+  const opacity = useTransform(scrollY, [0, 200], [1, 0]);
+
+  // Memoize static content
+  const backgroundPattern = useMemo(
+    () => ({
+      backgroundImage: `url('data:image/svg+xml,%3Csvg width="100" height="100" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3Cpattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"%3E%3Cpath d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(217,44,58,0.1)" stroke-width="1"/%3E%3C/pattern%3E%3C/defs%3E%3Crect width="100" height="100" fill="%23000000"/%3E%3Crect width="100" height="100" fill="url(%23grid)"/%3E%3C/svg%3E')`,
+      backgroundSize: '80px 80px',
+    }),
+    []
+  );
 
   return (
     <section className="relative flex items-center justify-center h-screen overflow-hidden">
       {/* Animated gradient overlay */}
       <motion.div
-        style={{ opacity }}
+        style={{ opacity, willChange: 'opacity' }}
         className="absolute inset-0 z-10"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/30 to-black/70" />
@@ -29,21 +40,15 @@ export default function PremiumHero() {
 
       {/* Background image with parallax - industrial theme */}
       <motion.div
-        style={{ scale, y: y1 }}
+        style={{ scale, y: y1, willChange: 'transform' }}
         className="absolute inset-0 z-0"
       >
-        <div
-          className="w-full h-full bg-cover bg-center"
-          style={{
-            backgroundImage: `url('data:image/svg+xml,%3Csvg width="100" height="100" xmlns="http://www.w3.org/2000/svg"%3E%3Cdefs%3E%3Cpattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"%3E%3Cpath d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(217,44,58,0.1)" stroke-width="1"/%3E%3C/pattern%3E%3C/defs%3E%3Crect width="100" height="100" fill="%23000000"/%3E%3Crect width="100" height="100" fill="url(%23grid)"/%3E%3C/svg%3E')`,
-            backgroundSize: '80px 80px',
-          }}
-        />
+        <div className="w-full h-full bg-cover bg-center" style={backgroundPattern} />
       </motion.div>
 
       {/* Content layer with staggered animations */}
       <motion.div
-        style={{ y: y2, opacity }}
+        style={{ y: y2, opacity, willChange: 'transform, opacity' }}
         className="relative z-20 px-4 text-center"
       >
         {/* Micro-label with slide-in */}

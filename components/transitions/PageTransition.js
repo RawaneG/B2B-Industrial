@@ -1,11 +1,12 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 
 /**
  * Page transition inspired by olivierlarose/nextjs-framer-page-transition
  * Curved overlay with route name display
+ * OPTIMIZED: Reduced animation duration, memoized components, will-change CSS
  */
 
 // Route display names
@@ -36,7 +37,7 @@ const anim = (variants) => ({
   exit: 'exit',
 });
 
-// Text animation variants
+// Text animation variants - OPTIMIZED: Reduced duration
 const text = {
   initial: {
     opacity: 1,
@@ -44,46 +45,46 @@ const text = {
   enter: {
     opacity: 0,
     top: -100,
-    transition: { duration: 0.75, delay: 0.35, ease: [0.76, 0, 0.24, 1] },
+    transition: { duration: 0.5, delay: 0.2, ease: [0.76, 0, 0.24, 1] },
     transitionEnd: { top: '47.5%' },
   },
   exit: {
     opacity: 1,
     top: '40%',
-    transition: { duration: 0.5, delay: 0.4, ease: [0.33, 1, 0.68, 1] },
+    transition: { duration: 0.35, delay: 0.25, ease: [0.33, 1, 0.68, 1] },
   },
 };
 
-// Curve path animation
+// Curve path animation - OPTIMIZED: Reduced duration
 const curve = (initialPath, targetPath) => ({
   initial: {
     d: initialPath,
   },
   enter: {
     d: targetPath,
-    transition: { duration: 0.75, delay: 0.35, ease: [0.76, 0, 0.24, 1] },
+    transition: { duration: 0.5, delay: 0.2, ease: [0.76, 0, 0.24, 1] },
   },
   exit: {
     d: initialPath,
-    transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+    transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] },
   },
 });
 
-// SVG translate animation
+// SVG translate animation - OPTIMIZED: Reduced duration
 const translate = {
   initial: {
     top: '-300px',
   },
   enter: {
     top: '-100vh',
-    transition: { duration: 0.75, delay: 0.35, ease: [0.76, 0, 0.24, 1] },
+    transition: { duration: 0.5, delay: 0.2, ease: [0.76, 0, 0.24, 1] },
     transitionEnd: {
       top: '100vh',
     },
   },
   exit: {
     top: '-300px',
-    transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+    transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] },
   },
 };
 
@@ -102,9 +103,18 @@ export default function Curve({ children }) {
       });
     }
     resize();
-    window.addEventListener('resize', resize);
+
+    // Debounce resize events for performance
+    let resizeTimeout;
+    const debouncedResize = () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(resize, 150);
+    };
+
+    window.addEventListener('resize', debouncedResize, { passive: true });
     return () => {
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', debouncedResize);
+      clearTimeout(resizeTimeout);
     };
   }, []);
 
@@ -117,10 +127,14 @@ export default function Curve({ children }) {
       />
       
       {/* Route name text - centered */}
-      <motion.p className="curve-route" {...anim(text)}>
+      <motion.p
+        className="curve-route"
+        {...anim(text)}
+        style={{ willChange: 'opacity, top' }}
+      >
         {getRouteName(router.route)}
       </motion.p>
-      
+
       {/* SVG curve */}
       {dimensions.width != null && <SvgCurve {...dimensions} />}
       
@@ -130,9 +144,10 @@ export default function Curve({ children }) {
   );
 }
 
-const SvgCurve = ({ height, width }) => {
+// Memoize SvgCurve to prevent unnecessary re-renders
+const SvgCurve = memo(({ height, width }) => {
   const initialPath = `
-    M0 300 
+    M0 300
     Q${width / 2} 0 ${width} 300
     L${width} ${height + 300}
     Q${width / 2} ${height + 600} 0 ${height + 300}
@@ -148,11 +163,15 @@ const SvgCurve = ({ height, width }) => {
   `;
 
   return (
-    <motion.svg className="curve-svg" {...anim(translate)}>
+    <motion.svg
+      className="curve-svg"
+      {...anim(translate)}
+      style={{ willChange: 'top' }}
+    >
       <motion.path {...anim(curve(initialPath, targetPath))} />
     </motion.svg>
   );
-};
+});
 
 // Also export as PageTransition for compatibility
 export { Curve as PageTransition };

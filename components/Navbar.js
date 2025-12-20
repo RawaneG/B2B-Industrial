@@ -1,23 +1,28 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useMemo, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/lib/i18n';
 
 /**
  * A responsive navigation bar for the NOVITECH.sn application with language switcher.
+ * OPTIMIZED: Memoized navigation links and components
  */
-export default function Navbar() {
+export default memo(function Navbar() {
   const { t, locale, switchLanguage, availableLocales } = useLanguage();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navLinks = [
-    { href: '/about', label: t('nav.about') },
-    { href: '/services', label: t('nav.services') },
-    { href: '/products', label: t('nav.products') },
-    { href: '/projects', label: t('nav.projects') },
-    { href: '/blog', label: t('nav.blog') },
-    { href: '/contact', label: t('nav.contact') },
-  ];
+  // Memoize navLinks to prevent recreation on every render
+  const navLinks = useMemo(
+    () => [
+      { href: '/about', label: t('nav.about') },
+      { href: '/services', label: t('nav.services') },
+      { href: '/products', label: t('nav.products') },
+      { href: '/projects', label: t('nav.projects') },
+      { href: '/blog', label: t('nav.blog') },
+      { href: '/contact', label: t('nav.contact') },
+    ],
+    [t]
+  );
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white/5 backdrop-blur-xl z-50 border-b border-white shadow-lg shadow-black/10">
@@ -123,4 +128,4 @@ export default function Navbar() {
       </AnimatePresence>
     </nav>
   );
-}
+});

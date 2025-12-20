@@ -120,12 +120,13 @@ const LightPillar = ({
       }
 
       // Apply layered wave deformation to position
+      // OPTIMIZED: Reduced iterations from 4 to 3
       vec3 applyWaveDeformation(vec3 pos, float timeOffset) {
         float frequency = 1.0;
         float amplitude = 1.0;
         vec3 deformed = pos;
 
-        for(float i = 0.0; i < 4.0; i++) {
+        for(float i = 0.0; i < 3.0; i++) {
           deformed.xz *= rot(0.4);
           float phase = timeOffset * i * 2.0;
           vec3 oscillation = cos(deformed.zxy * frequency - phase);
@@ -168,7 +169,8 @@ const LightPillar = ({
 
         vec3 color = vec3(0.0);
 
-        for(float i = 0.0; i < 100.0; i++) {
+        // OPTIMIZED: Reduced iterations from 100 to 50 for better performance
+        for(float i = 0.0; i < 50.0; i++) {
           vec3 pos = origin + direction * depth;
           pos.xz *= rotX;
 
@@ -254,9 +256,10 @@ const LightPillar = ({
       container.addEventListener('mousemove', handleMouseMove, { passive: true });
     }
 
-    // Animation loop with fixed timestep
+    // Animation loop with adaptive framerate
+    // OPTIMIZED: Target 30fps instead of 60fps for better performance on slow connections
     let lastTime = performance.now();
-    const targetFPS = 60;
+    const targetFPS = 30;
     const frameTime = 1000 / targetFPS;
 
     const animate = currentTime => {

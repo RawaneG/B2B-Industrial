@@ -4,9 +4,10 @@ import { useEffect, useRef } from 'react';
  * Dark Veil Background - Inspired by ReactBits.dev
  * Creates a mysterious dark background with floating light particles
  * and smooth wave-like gradients
+ * OPTIMIZED: Reduced particle count, throttled mouse events, optimized connection lines
  */
 export default function DarkVeil({
-  particleCount = 80,
+  particleCount = 40, // Reduced from 80 for better performance
   particleColor = '#d92c3a',
   accentColor = '#f7a80d',
   baseColor = '#0a0a0a',
@@ -18,6 +19,8 @@ export default function DarkVeil({
   const animationRef = useRef(null);
   const particlesRef = useRef([]);
   const mouseRef = useRef({ x: 0, y: 0, active: false });
+  const lastMouseMoveRef = useRef(0);
+  const frameCountRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -50,6 +53,11 @@ export default function DarkVeil({
     };
 
     const handleMouseMove = (e) => {
+      // Throttle mouse events to max 30fps
+      const now = Date.now();
+      if (now - lastMouseMoveRef.current < 33) return;
+      lastMouseMoveRef.current = now;
+
       mouseRef.current = {
         x: e.clientX,
         y: e.clientY,
@@ -196,23 +204,31 @@ export default function DarkVeil({
     };
 
     const drawConnectionLines = () => {
+      // Only draw connection lines every 3rd frame to reduce CPU usage
+      if (frameCountRef.current % 3 !== 0) return;
+
       const particles = particlesRef.current;
-      ctx.strokeStyle = 'rgba(217, 44, 58, 0.05)';
+      const maxConnections = 30; // Limit total connections
+      let connectionCount = 0;
+
       ctx.lineWidth = 1;
 
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
+      for (let i = 0; i < particles.length && connectionCount < maxConnections; i++) {
+        for (let j = i + 1; j < particles.length && connectionCount < maxConnections; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (dist < 100) {
+          // Quick distance check without sqrt when possible
+          const distSquared = dx * dx + dy * dy;
+          if (distSquared < 10000) { // 100 * 100
+            const dist = Math.sqrt(distSquared);
             const opacity = (1 - dist / 100) * 0.15;
             ctx.strokeStyle = `rgba(217, 44, 58, ${opacity})`;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
+            connectionCount++;
           }
         }
       }
@@ -220,6 +236,7 @@ export default function DarkVeil({
 
     const animate = () => {
       time += 0.01;
+      frameCountRef.current++;
 
       // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -230,19 +247,21 @@ export default function DarkVeil({
       drawParticles();
       drawMouseGlow();
 
-      // Add subtle vignette
-      const vignette = ctx.createRadialGradient(
-        canvas.width / 2,
-        canvas.height / 2,
-        canvas.height * 0.3,
-        canvas.width / 2,
-        canvas.height / 2,
-        canvas.height
-      );
-      vignette.addColorStop(0, 'transparent');
-      vignette.addColorStop(1, 'rgba(0, 0, 0, 0.4)');
-      ctx.fillStyle = vignette;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Add subtle vignette (only every other frame)
+      if (frameCountRef.current % 2 === 0) {
+        const vignette = ctx.createRadialGradient(
+          canvas.width / 2,
+          canvas.height / 2,
+          canvas.height * 0.3,
+          canvas.width / 2,
+          canvas.height / 2,
+          canvas.height
+        );
+        vignette.addColorStop(0, 'transparent');
+        vignette.addColorStop(1, 'rgba(0, 0, 0, 0.4)');
+        ctx.fillStyle = vignette;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
 
       animationRef.current = requestAnimationFrame(animate);
     };
@@ -267,7 +286,10 @@ export default function DarkVeil({
     <canvas
       ref={canvasRef}
       className={`fixed inset-0 -z-10 ${blur ? 'backdrop-blur-[0.5px]' : ''} ${className}`}
-      style={{ background: baseColor }}
+      style={{
+        background: baseColor,
+        willChange: 'transform',
+      }}
     />
   );
 }

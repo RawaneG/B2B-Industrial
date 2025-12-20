@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 /**
  * Animated Waves Background - Inspired by ReactBits.dev
  * Creates flowing wave lines that react to mouse movement
+ * OPTIMIZED: Increased gap spacing, throttled mouse events, reduced calculations
  */
 export default function Waves({
   lineColor = '#d92c3a',
@@ -14,13 +15,14 @@ export default function Waves({
   friction = 0.9,
   tension = 0.01,
   maxCursorMove = 120,
-  xGap = 12,
-  yGap = 36,
+  xGap = 16, // Increased from 12 for fewer points
+  yGap = 48, // Increased from 36 for fewer points
   className = '',
 }) {
   const canvasRef = useRef(null);
   const animationRef = useRef(null);
   const mouseRef = useRef({ x: -1000, y: -1000, vx: 0, vy: 0 });
+  const lastMouseMoveRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -56,6 +58,11 @@ export default function Waves({
     };
 
     const handleMouseMove = (e) => {
+      // Throttle mouse events to max 30fps
+      const now = Date.now();
+      if (now - lastMouseMoveRef.current < 33) return;
+      lastMouseMoveRef.current = now;
+
       mouseRef.current.x = e.clientX;
       mouseRef.current.y = e.clientY;
     };
@@ -166,6 +173,9 @@ export default function Waves({
     <canvas
       ref={canvasRef}
       className={`fixed inset-0 -z-10 ${className}`}
+      style={{
+        willChange: 'transform',
+      }}
     />
   );
 }
