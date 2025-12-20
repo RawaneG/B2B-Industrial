@@ -2,31 +2,32 @@
 import React, { useEffect, useState, memo } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
+import { useLanguage } from '@/lib/i18n';
 
 /**
  * Page transition inspired by olivierlarose/nextjs-framer-page-transition
  * Curved overlay with route name display
- * OPTIMIZED: Reduced animation duration, memoized components, will-change CSS
+ * OPTIMIZED: Reduced animation duration, memoized components, will-change CSS, i18n support
  */
 
-// Route display names
-const routes = {
-  '/': 'Accueil',
-  '/about': 'À Propos',
-  '/contact': 'Contact',
-  '/products': 'Produits',
-  '/services': 'Services',
-  '/blog': 'Blog',
-  '/careers': 'Carrières',
-  '/legal': 'Mentions Légales',
-  '/projects': 'Projets',
+// Route translation keys
+const routeKeys = {
+  '/': 'routes.home',
+  '/about': 'routes.about',
+  '/contact': 'routes.contact',
+  '/products': 'routes.products',
+  '/services': 'routes.services',
+  '/blog': 'routes.blog',
+  '/careers': 'routes.careers',
+  '/legal': 'routes.legal',
+  '/projects': 'routes.projects',
 };
 
-const getRouteName = (route) => {
-  if (routes[route]) return routes[route];
+const getRouteKey = (route) => {
+  if (routeKeys[route]) return routeKeys[route];
   const basePath = '/' + route.split('/')[1];
-  if (routes[basePath]) return routes[basePath];
-  return 'Page';
+  if (routeKeys[basePath]) return routeKeys[basePath];
+  return 'routes.page';
 };
 
 // Animation helper
@@ -90,10 +91,12 @@ const translate = {
 
 export default function Curve({ children }) {
   const router = useRouter();
+  const { t } = useLanguage();
   const [dimensions, setDimensions] = useState({
     width: null,
     height: null,
   });
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
 
   useEffect(() => {
     function resize() {
@@ -118,6 +121,20 @@ export default function Curve({ children }) {
     };
   }, []);
 
+  // Show transition on initial page load
+  useEffect(() => {
+    // Trigger initial animation
+    const timer = setTimeout(() => {
+      setIsInitialLoad(false);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Get translated route name
+  const routeKey = getRouteKey(router.route);
+  const routeName = t(routeKey);
+
   return (
     <div className="page-curve">
       {/* Background fallback while dimensions load */}
@@ -125,19 +142,19 @@ export default function Curve({ children }) {
         style={{ opacity: dimensions.width == null ? 1 : 0 }}
         className="curve-background"
       />
-      
+
       {/* Route name text - centered */}
       <motion.p
         className="curve-route"
         {...anim(text)}
         style={{ willChange: 'opacity, top' }}
       >
-        {getRouteName(router.route)}
+        {routeName}
       </motion.p>
 
       {/* SVG curve */}
       {dimensions.width != null && <SvgCurve {...dimensions} />}
-      
+
       {/* Page content */}
       {children}
     </div>
