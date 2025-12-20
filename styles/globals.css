@@ -341,3 +341,41 @@ html {
   margin: 0;
   pointer-events: none;
 }
+
+/* PreLoader Styles - Same curve transition as PageTransition */
+.preloader-svg,
+.preloader-background {
+  position: fixed;
+  height: calc(100vh + 600px);
+  width: 100vw;
+  pointer-events: none;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+}
+
+.preloader-svg {
+  fill: var(--color-primary);
+}
+
+.preloader-background {
+  background-color: var(--color-primary);
+  transition: opacity 0s linear 0.1s;
+}
+
+.preloader-text {
+  position: fixed;
+  left: 50%;
+  top: 40%;
+  transform: translateX(-50%);
+  color: var(--color-neutral);
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  z-index: 10000;
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  margin: 0;
+  pointer-events: none;
+}
