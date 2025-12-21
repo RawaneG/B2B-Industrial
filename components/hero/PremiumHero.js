@@ -217,10 +217,11 @@ export default function PremiumHero({
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{ background: 'hsl(var(--brand-dark))' }}
     >
-      {/* Dark Veil Background everywhere */}
-      <div className="absolute inset-0 z-0">
+      {/* Background: DarkVeil on desktop, simple radial on mobile/tablet */}
+      <div className="hidden md:block absolute inset-0 z-0">
         <DarkVeil speed={0.5} />
       </div>
+      <div className="md:hidden absolute inset-0 z-0 background" aria-hidden="true" />
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">
@@ -249,7 +250,7 @@ export default function PremiumHero({
             />
             <AnimatedText
               text={t('hero.title2') || 'Performance'}
-              className="block mt-10 w-full"
+              className="block mt-6 sm:mt-10 w-full"
               delay={0.8}
               as={GradientText}
             />
