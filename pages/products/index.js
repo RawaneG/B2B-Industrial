@@ -34,7 +34,7 @@ export default function ProductsPage() {
     <div className="relative min-h-screen bg-neutral">
       <Aurora />
       <Navbar />
-      
+
       {/* Hero Section */}
       <div className="relative pt-32 pb-20" style={{ background: 'hsl(var(--brand-dark))' }}>
         <div className="container-custom text-center">
@@ -84,7 +84,7 @@ export default function ProductsPage() {
               </div>
               <h2 className="text-3xl font-bold text-secondary">{category.label}</h2>
             </div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {category.items.map((item, itemIndex) => (
                 <motion.div
@@ -112,7 +112,7 @@ export default function ProductsPage() {
                           {category.label}
                         </span>
                       </div>
-                      
+
                       {/* Content */}
                       <div className="p-6">
                         <h3 className="text-lg font-bold text-secondary mb-2 group-hover:text-primary transition-colors">
@@ -120,9 +120,6 @@ export default function ProductsPage() {
                         </h3>
                         <div className="flex items-center text-primary font-medium">
                           <span>{t('products.learnMore')}</span>
-                          <svg className="w-4 h-4 ml-2 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                          </svg>
                         </div>
                       </div>
                     </div>

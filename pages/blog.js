@@ -43,7 +43,7 @@ export default function BlogPage() {
     <div className="relative min-h-screen bg-neutral">
       <GridPattern />
       <Navbar />
-      
+
       {/* Hero Section */}
       <div className="relative pt-32 pb-20" style={{ background: 'hsl(var(--brand-dark))' }}>
         <div className="container-custom text-center">
@@ -100,8 +100,7 @@ export default function BlogPage() {
                       {post.category}
                     </span>
                   </div>
-                  
-                        dark
+
                   {/* Content */}
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
@@ -109,15 +108,15 @@ export default function BlogPage() {
                       <span>•</span>
                       <span>{post.readTime} min {t('blog.readTime')}</span>
                     </div>
-                    
+
                     <h3 className="text-xl font-bold text-secondary mb-3 group-hover:text-primary transition-colors">
                       {t(post.titleKey)}
                     </h3>
-                    
+
                     <p className="text-gray-600 mb-6 flex-1">
                       {t(post.excerptKey)}
                     </p>
-                    
+
                     <div className="flex items-center text-primary font-semibold group-hover:text-accent transition-colors">
                       <span>{t('blog.readMore')}</span>
                       <svg className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

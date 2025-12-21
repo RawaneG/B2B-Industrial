@@ -14,13 +14,7 @@ export default function LegalPage() {
       <Navbar />
 
       {/* Hero Section */}
-      <Section
-        id="legal-hero"
-        title={t('legal.title')}
-        description={t('legal.description')}
-        className="mb-20"
-        dark
-      >
+      <div className="relative pt-32 pb-20" style={{ background: 'hsl(var(--brand-dark))' }}>
         <div className="container-custom text-center">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
@@ -47,7 +41,7 @@ export default function LegalPage() {
             {t('legal.description')}
           </motion.p>
         </div>
-      </Section>
+      </div>
 
       {/* Content Section */}
       <Section id="legal-content">
