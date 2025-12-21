@@ -6,8 +6,8 @@ import { useEffect, useRef } from 'react';
  */
 export default function GridPattern({
   gridSize = 60,
-  lineColor = 'rgba(217, 44, 58, 0.1)',
-  glowColor = 'rgba(247, 168, 13, 0.3)',
+  lineColor = 'rgba(6, 0, 16, 0.08)',
+  glowColor = 'rgba(6, 0, 16, 0.16)',
   speed = 1,
   className = '',
 }) {
@@ -93,7 +93,7 @@ export default function GridPattern({
             const pulseIntensity = (Math.sin(time * 3 + i + j) + 1) * 0.5;
             
             const glow = ctx.createRadialGradient(x, y, 0, x, y, 15 * intensity);
-            glow.addColorStop(0, glowColor.replace('0.3', String(0.6 * intensity * pulseIntensity)));
+            glow.addColorStop(0, glowColor.replace('0.16', String(0.6 * intensity * pulseIntensity)));
             glow.addColorStop(1, 'transparent');
             
             ctx.fillStyle = glow;
@@ -102,14 +102,14 @@ export default function GridPattern({
             // Draw dot
             ctx.beginPath();
             ctx.arc(x, y, 2 + intensity * 3, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(217, 44, 58, ${0.5 + intensity * 0.5})`;
+            ctx.fillStyle = `rgba(6, 0, 16, ${0.3 + intensity * 0.4})`;
             ctx.fill();
           } else {
             // Subtle pulsing dots at intersections
             const pulse = (Math.sin(time + i * 0.5 + j * 0.3) + 1) * 0.5;
             ctx.beginPath();
             ctx.arc(x, y, 1 + pulse, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(217, 44, 58, ${0.1 + pulse * 0.1})`;
+            ctx.fillStyle = `rgba(6, 0, 16, ${0.06 + pulse * 0.08})`;
             ctx.fill();
           }
         }
@@ -136,7 +136,7 @@ export default function GridPattern({
     <canvas
       ref={canvasRef}
       className={`fixed inset-0 -z-10 ${className}`}
-      style={{ background: 'linear-gradient(180deg, #0a0a0a 0%, #0f0f0f 100%)' }}
+      style={{ background: 'linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.92) 100%)' }}
     />
   );
 }

@@ -45,7 +45,7 @@ export default function BlogPage() {
       <Navbar />
       
       {/* Hero Section */}
-      <div className="relative pt-32 pb-20 bg-gradient-to-b from-secondary to-secondary/95">
+      <div className="relative pt-32 pb-20" style={{ background: 'hsl(var(--brand-dark))' }}>
         <div className="container-custom text-center">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
@@ -101,6 +101,7 @@ export default function BlogPage() {
                     </span>
                   </div>
                   
+                        dark
                   {/* Content */}
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
@@ -132,7 +133,7 @@ export default function BlogPage() {
       </Section>
 
       {/* Newsletter Section */}
-      <div className="bg-gradient-to-br from-secondary to-secondary/95 py-20">
+      <div className="py-20" style={{ background: 'hsl(var(--brand-dark))' }}>
         <div className="container-custom text-center">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}

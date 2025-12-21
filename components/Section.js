@@ -7,9 +7,13 @@ import { motion } from 'framer-motion';
  */
 export default function Section({ title, description, children, id, className = '', dark = false }) {
   return (
-    <section 
-      id={id} 
-      className={`section-padding container-custom ${dark ? 'bg-secondary text-white' : ''} ${className}`}
+    <section
+      id={id}
+      className={`section-padding container-custom ${className}`}
+      style={{
+        background: dark ? 'hsl(var(--brand-dark))' : 'hsl(var(--surface))',
+        color: dark ? 'hsl(var(--text-on-dark))' : 'hsl(var(--text))',
+      }}
     >
       {title && (
         <motion.div 
@@ -19,12 +23,12 @@ export default function Section({ title, description, children, id, className = 
           transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 ${dark ? 'text-white' : 'text-secondary'}`}>
-            <span className="text-primary">{title.split(' ')[0]}</span>{' '}
-            {title.split(' ').slice(1).join(' ')}
+          <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-4`}>
+            <span style={{ color: 'hsl(var(--accent))' }}>{title.split(' ')[0]}</span>{' '}
+            <span>{title.split(' ').slice(1).join(' ')}</span>
           </h2>
           {description && (
-            <p className={`text-lg max-w-2xl mx-auto ${dark ? 'text-gray-300' : 'text-gray-600'}`}>
+            <p className={`text-lg max-w-2xl mx-auto ${dark ? '' : ''}`} style={{ color: dark ? 'hsl(var(--muted-on-dark))' : 'hsl(var(--muted))' }}>
               {description}
             </p>
           )}
@@ -33,7 +37,8 @@ export default function Section({ title, description, children, id, className = 
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-24 h-1 bg-gradient-to-r from-primary to-accent rounded-full mx-auto mt-6"
+            className="w-24 h-1 rounded-full mx-auto mt-6"
+            style={{ background: `linear-gradient(90deg, hsl(var(--brand-dark)), hsl(var(--accent)))` }}
           />
         </motion.div>
       )}

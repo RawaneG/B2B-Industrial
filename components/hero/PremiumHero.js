@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import Link from 'next/link';
 import { useLanguage } from '@/lib/i18n';
-import { LightPillar } from '@/components/backgrounds';
+import DarkVeil from '@/components/DarkVeil.jsx';
 
 /**
  * Animated Text Component - Letter by letter animation
@@ -210,40 +210,17 @@ export default function PremiumHero({
     checkMobile();
   }, []);
 
-  // Mobile background style
-  const mobileBg = isMobile
-    ? {
-      background: 'radial-gradient(ellipse at 60% 40%, #a18aff 0%, #060010 80%)',
-      backgroundColor: '#060010',
-    }
-    : {};
 
+  // Use theme variable for background
   return (
     <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={mobileBg}
+      style={{ background: 'hsl(var(--brand-dark))' }}
     >
-      {/* Light Pillar Background (desktop only) */}
-      {!isMobile && (
-        <div className="absolute inset-0 z-0">
-          <LightPillar
-            topColor="#D92C3A"
-            bottomColor="#FF6B7A"
-            intensity={0.8}
-            rotationSpeed={0.2}
-            glowAmount={0.008}
-            pillarWidth={2.5}
-            pillarHeight={0.5}
-            noiseIntensity={0.3}
-            mixBlendMode="screen"
-          />
-        </div>
-      )}
-
-      {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70 z-[1]" />
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[128px] animate-pulse z-[1]" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-[128px] animate-pulse z-[1]" style={{ animationDelay: '1s' }} />
+      {/* Dark Veil Background everywhere */}
+      <div className="absolute inset-0 z-0">
+        <DarkVeil speed={0.5} />
+      </div>
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">

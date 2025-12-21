@@ -9,9 +9,9 @@ import Link from 'next/link';
  */
 export default function Hero() {
   return (
-    <section className="relative flex items-center justify-center h-screen text-center text-white">
+    <section className="relative flex items-center justify-center h-screen text-center" style={{ color: 'hsl(var(--text-on-dark))' }}>
       {/* Dark overlay to improve contrast against the particle background */}
-      <div className="absolute inset-0 bg-secondary opacity-60 z-0" />
+      <div className="absolute inset-0 z-0" style={{ background: 'hsl(var(--brand-dark))', opacity: 0.6 }} />
       <div className="relative z-10 px-4">
         <motion.h1
           initial={{ opacity: 0, y: -50 }}
@@ -37,12 +37,12 @@ export default function Hero() {
           className="flex flex-col sm:flex-row justify-center gap-4"
         >
           <Link href="/products">
-            <span className="bg-primary hover:bg-red-700 text-white font-medium py-3 px-8 rounded-full transition-colors">
+            <span className="font-medium py-3 px-8 rounded-full transition-colors" style={{ background: 'hsl(var(--accent))', color: 'white' }}>
               Explore Products
             </span>
           </Link>
           <Link href="/contact">
-            <span className="bg-white text-secondary hover:bg-gray-200 font-medium py-3 px-8 rounded-full transition-colors">
+            <span className="bg-white font-medium py-3 px-8 rounded-full transition-colors" style={{ color: 'hsl(var(--brand-dark))' }}>
               Request a Quote
             </span>
           </Link>

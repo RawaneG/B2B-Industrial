@@ -6,8 +6,8 @@ import { useEffect, useRef } from 'react';
  * OPTIMIZED: Increased gap spacing, throttled mouse events, reduced calculations
  */
 export default function Waves({
-  lineColor = '#d92c3a',
-  backgroundColor = '#0a0a0a',
+  lineColor = 'hsl(var(--brand-dark))',
+  backgroundColor = 'hsl(var(--brand-dark))',
   waveSpeedX = 0.02,
   waveSpeedY = 0.01,
   waveAmpX = 40,
@@ -67,9 +67,39 @@ export default function Waves({
       mouseRef.current.y = e.clientY;
     };
 
+    // Resolve CSS variables in color strings for canvas (canvas can't parse var() directly)
+    const resolveCssVars = (color) => {
+      if (typeof window === 'undefined' || !color || !color.includes('var(')) return color;
+      try {
+        return color.replace(/var\((--[a-zA-Z0-9-_]+)\)/g, (_, name) =>
+          getComputedStyle(document.documentElement).getPropertyValue(name).trim() || ''
+        );
+      } catch (e) {
+        return color;
+      }
+    };
+
+    const colorWithAlpha = (color, alpha) => {
+      if (!color) return `rgba(6,0,16,${alpha})`;
+      const resolved = resolveCssVars(color);
+      if (resolved.startsWith('#')) {
+        const r = parseInt(resolved.slice(1, 3), 16);
+        const g = parseInt(resolved.slice(3, 5), 16);
+        const b = parseInt(resolved.slice(5, 7), 16);
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+      }
+      if (resolved.startsWith('hsl')) {
+        if (resolved.includes('/')) {
+          return resolved.replace(/\/[^)]*\)/, `/${alpha})`);
+        }
+        return resolved.replace(/\)$/, ` / ${alpha})`);
+      }
+      return resolved;
+    };
+
     const animate = () => {
       time += 1;
-      ctx.fillStyle = backgroundColor;
+      ctx.fillStyle = colorWithAlpha(backgroundColor, 1);
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       const { x: mouseX, y: mouseY } = mouseRef.current;
@@ -132,10 +162,9 @@ export default function Waves({
 
         // Gradient stroke based on row position
         const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
-        const hue = (j / rows) * 30; // Slight color variation
-        gradient.addColorStop(0, `rgba(217, 44, 58, ${0.1 + (j / rows) * 0.15})`);
-        gradient.addColorStop(0.5, `rgba(247, 168, 13, ${0.05 + (j / rows) * 0.1})`);
-        gradient.addColorStop(1, `rgba(217, 44, 58, ${0.1 + (j / rows) * 0.15})`);
+        gradient.addColorStop(0, colorWithAlpha(backgroundColor, 0.06 + (j / rows) * 0.06));
+        gradient.addColorStop(0.5, colorWithAlpha(backgroundColor, 0.03 + (j / rows) * 0.04));
+        gradient.addColorStop(1, colorWithAlpha(backgroundColor, 0.06 + (j / rows) * 0.06));
         
         ctx.strokeStyle = gradient;
         ctx.lineWidth = 1;

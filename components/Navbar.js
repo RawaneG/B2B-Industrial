@@ -25,13 +25,13 @@ export default memo(function Navbar() {
   );
 
   return (
-    <nav className="fixed top-0 left-0 w-full bg-black/40 backdrop-blur-xl z-50 border-b border-white/20 shadow-lg shadow-black/20">
+    <nav className="fixed top-0 left-0 w-full backdrop-blur-xl z-50 shadow-lg shadow-black/20" style={{ background: 'var(--nav-bg)', borderBottom: '1px solid rgba(255,255,255,0.12)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center space-x-4">
           <Link href="/">
-            <span className="text-white font-bold text-xl tracking-tight hover:text-primary transition-colors">
-              NOVITECH<span className="text-primary">.sn</span>
+            <span className="text-[hsl(var(--text-on-dark))] font-bold text-xl tracking-tight hover:text-[hsl(var(--accent))] transition-colors">
+              NOVITECH<span style={{ color: 'hsl(var(--primary))' }}>.sn</span>
             </span>
           </Link>
         </div>
@@ -42,23 +42,24 @@ export default memo(function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="relative px-4 py-2 text-white/90 hover:text-white font-medium text-sm transition-colors group"
+              className="relative px-4 py-2 text-[hsl(var(--text-on-dark))]/90 hover:text-[hsl(var(--text-on-dark))] font-medium text-sm transition-colors group"
             >
               {link.label}
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-3/4 rounded-full" />
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 transition-all duration-300 group-hover:w-3/4 rounded-full" style={{ background: 'hsl(var(--accent))' }} />
             </Link>
           ))}
 
           {/* Language Switcher */}
-          <div className="ml-4 flex items-center space-x-1 bg-white/10 rounded-full p-1">
+            <div className="ml-4 flex items-center space-x-1 bg-white/10 rounded-full p-1">
             {availableLocales.map((lang) => (
               <button
                 key={lang}
                 onClick={() => switchLanguage(lang)}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 ${locale === lang
-                    ? 'bg-primary text-white shadow-md'
-                    : 'text-white/70 hover:text-white hover:bg-white/10'
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-300 ${locale === lang
+                    ? 'shadow-md'
+                    : ''
                   }`}
+                  style={locale === lang ? { background: 'hsl(var(--accent))', color: 'hsl(var(--accent-foreground))' } : { color: 'rgba(255,255,255,0.7)' }}
               >
                 {lang.toUpperCase()}
               </button>
@@ -68,7 +69,8 @@ export default memo(function Navbar() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-white p-2"
+          className="md:hidden p-2"
+          style={{ color: 'hsl(var(--text-on-dark))' }}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -89,14 +91,16 @@ export default memo(function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-black/40 backdrop-blur-xl border-t border-white/20"
+            className="md:hidden backdrop-blur-xl border-t"
+            style={{ background: 'var(--nav-bg)', borderTop: '1px solid rgba(255,255,255,0.08)' }}
           >
             <div className="px-4 py-4 space-y-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="block px-4 py-3 text-white hover:bg-white/10 rounded-xl transition-colors font-medium"
+                  className="block px-4 py-3 hover:bg-white/10 rounded-xl transition-colors font-medium"
+                  style={{ color: 'rgba(255,255,255,0.95)' }}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
@@ -105,7 +109,7 @@ export default memo(function Navbar() {
 
               {/* Mobile Language Switcher */}
               <div className="flex items-center space-x-2 px-4 pt-4 border-t border-white/10 mt-4">
-                <span className="text-white/60 text-sm">{t('nav.language')}:</span>
+                <span className="text-[rgba(255,255,255,0.6)] text-sm">{t('nav.language')}:</span>
                 {availableLocales.map((lang) => (
                   <button
                     key={lang}
@@ -113,10 +117,8 @@ export default memo(function Navbar() {
                       switchLanguage(lang);
                       setIsMobileMenuOpen(false);
                     }}
-                    className={`px-4 py-2 text-sm font-semibold rounded-full transition-all ${locale === lang
-                        ? 'bg-primary text-white'
-                        : 'text-white/70 bg-white/10'
-                      }`}
+                    className={`px-4 py-2 text-sm font-semibold rounded-full transition-all`}
+                    style={locale === lang ? { background: 'hsl(var(--accent))', color: 'white' } : { color: 'rgba(255,255,255,0.7)', background: 'rgba(255,255,255,0.06)' }}
                   >
                     {lang.toUpperCase()}
                   </button>

@@ -142,7 +142,7 @@ export default function WebGLParticles() {
         height: '100%',
         zIndex: -1,
         pointerEvents: 'none',
-        background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
+        background: 'linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.9) 100%)',
       }}
     >
       <Canvas

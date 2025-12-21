@@ -31,17 +31,17 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-secondary text-white">
+    <footer style={{ background: 'hsl(var(--brand-dark))', color: 'hsl(var(--text-on-dark))' }}>
       <div className="container-custom py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-4">
-              <span className="text-2xl font-bold">
-                NOVITECH<span className="text-primary">.sn</span>
+              <span className="text-2xl font-bold" style={{ color: 'hsl(var(--text-on-dark))' }}>
+                NOVITECH<span style={{ color: 'hsl(var(--primary))' }}>.sn</span>
               </span>
             </Link>
-            <p className="text-gray-400 mb-6 leading-relaxed">
+            <p className="mb-6 leading-relaxed" style={{ color: 'hsl(var(--muted-on-dark))' }}>
               {t('home.contactInfo').split('|')[0].replace('Email :', '').trim() || 'Équipements industriels et solutions de sécurité pour les professionnels.'}
             </p>
             {/* Social Links */}
@@ -53,7 +53,8 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
+                    className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center transition-colors"
+                    style={{ color: 'hsl(var(--accent-foreground))' }}
                 >
                   <span className="sr-only">{key}</span>
                   <SocialIcon name={key} />
@@ -65,13 +66,14 @@ export default function Footer() {
           {/* Navigation Links */}
           {footerLinks.map((section) => (
             <div key={section.title}>
-              <h3 className="text-lg font-semibold mb-4">{section.title}</h3>
+              <h3 className="text-lg font-semibold mb-4" style={{ color: 'hsl(var(--text-on-dark))' }}>{section.title}</h3>
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-gray-400 hover:text-primary transition-colors"
+                      className="hover:transition-colors"
+                      style={{ color: 'hsl(var(--muted-on-dark))' }}
                     >
                       {link.label}
                     </Link>
@@ -83,10 +85,10 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">{t('nav.contact')}</h3>
-            <ul className="space-y-3 text-gray-400">
+            <h3 className="text-lg font-semibold mb-4" style={{ color: 'hsl(var(--text-on-dark))' }}>{t('nav.contact')}</h3>
+            <ul className="space-y-3" style={{ color: 'hsl(var(--muted-on-dark))' }}>
               <li className="flex items-center gap-3">
-                <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'hsl(var(--accent))' }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-primary transition-colors">
@@ -94,7 +96,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'hsl(var(--accent))' }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
                 <a href={`tel:${CONTACT_INFO.phone.replace(/\s/g, '')}`} className="hover:text-primary transition-colors">
@@ -102,7 +104,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <svg className="w-5 h-5 text-primary mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'hsl(var(--accent))' }}>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
@@ -115,15 +117,15 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm">
+          <div className="border-t mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+          <p className="text-sm" style={{ color: 'hsl(var(--muted-on-dark))' }}>
             © {currentYear} NOVITECH.sn. {t('footer.allRightsReserved')}
           </p>
           <div className="flex gap-6 text-sm">
-            <Link href="/legal" className="text-gray-400 hover:text-primary transition-colors">
+            <Link href="/legal" className="hover:transition-colors" style={{ color: 'hsl(var(--muted-on-dark))' }}>
               {t('nav.legal')}
             </Link>
-            <Link href="/legal#privacy" className="text-gray-400 hover:text-primary transition-colors">
+            <Link href="/legal#privacy" className="hover:transition-colors" style={{ color: 'hsl(var(--muted-on-dark))' }}>
               {t('footer.privacy')}
             </Link>
           </div>

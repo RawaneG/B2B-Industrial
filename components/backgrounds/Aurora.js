@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
  * OPTIMIZED: Increased step size, reduced layers, optimized gradient calculations
  */
 export default function Aurora({
-  colorStops = ['#d92c3a', '#f7a80d', '#1f2937', '#d92c3a'],
+  colorStops = ['hsl(var(--brand-dark))', 'hsl(var(--brand-dark))', 'hsl(var(--brand-dark))', 'hsl(var(--brand-dark))'],
   blend = 0.5,
   amplitude = 1.0,
   speed = 0.5,
@@ -39,6 +39,18 @@ export default function Aurora({
             b: parseInt(result[3], 16),
           }
         : { r: 0, g: 0, b: 0 };
+    };
+
+    // Resolve CSS variables in color strings for canvas (canvas can't parse var() directly)
+    const resolveCssVars = (color) => {
+      if (typeof window === 'undefined' || !color || !color.includes('var(')) return color;
+      try {
+        return color.replace(/var\((--[a-zA-Z0-9-_]+)\)/g, (_, name) =>
+          getComputedStyle(document.documentElement).getPropertyValue(name).trim() || ''
+        );
+      } catch (e) {
+        return color;
+      }
     };
 
     const animate = () => {
@@ -79,7 +91,7 @@ export default function Aurora({
         const gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
         colorStops.forEach((color, i) => {
           const offset = (i / (colorStops.length - 1) + time * 0.1) % 1;
-          gradient.addColorStop(Math.abs(offset), color);
+          gradient.addColorStop(Math.abs(offset), resolveCssVars(color));
         });
 
         ctx.fillStyle = gradient;
@@ -97,8 +109,8 @@ export default function Aurora({
           canvas.height * 0.5,
           canvas.width * 0.8
         );
-        glowGradient.addColorStop(0, 'rgba(217, 44, 58, 0.15)');
-        glowGradient.addColorStop(0.5, 'rgba(247, 168, 13, 0.05)');
+        glowGradient.addColorStop(0, 'rgba(6, 0, 16, 0.15)');
+        glowGradient.addColorStop(0.5, 'rgba(6, 0, 16, 0.05)');
         glowGradient.addColorStop(1, 'transparent');
 
         ctx.globalAlpha = 1;
@@ -121,12 +133,12 @@ export default function Aurora({
     };
   }, [colorStops, blend, amplitude, speed]);
 
-  return (
+    return (
     <canvas
       ref={canvasRef}
       className={`fixed inset-0 -z-10 ${className}`}
       style={{
-        background: 'linear-gradient(180deg, #0a0a0a 0%, #111111 50%, #0a0a0a 100%)',
+        background: 'linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.95) 50%, hsl(var(--primary)) 100%)',
         willChange: 'transform',
       }}
     />

@@ -8,9 +8,9 @@ import { useEffect, useRef } from 'react';
  */
 export default function DarkVeil({
   particleCount = 40, // Reduced from 80 for better performance
-  particleColor = '#d92c3a',
-  accentColor = '#f7a80d',
-  baseColor = '#0a0a0a',
+  particleColor = 'hsl(var(--brand-dark))',
+  accentColor = 'hsl(var(--accent))',
+  baseColor = 'hsl(var(--brand-dark))',
   speed = 1,
   blur = true,
   className = '',
@@ -69,6 +69,18 @@ export default function DarkVeil({
       mouseRef.current.active = false;
     };
 
+    // Resolve CSS variables in color strings for canvas (canvas can't parse var() directly)
+    const resolveCssVars = (color) => {
+      if (typeof window === 'undefined' || !color || !color.includes('var(')) return color;
+      try {
+        return color.replace(/var\((--[a-zA-Z0-9-_]+)\)/g, (_, name) =>
+          getComputedStyle(document.documentElement).getPropertyValue(name).trim() || ''
+        );
+      } catch (e) {
+        return color;
+      }
+    };
+
     const drawVeil = () => {
       // Create dark gradient base
       const gradient = ctx.createRadialGradient(
@@ -79,9 +91,9 @@ export default function DarkVeil({
         canvas.height / 2,
         canvas.width * 0.8
       );
-      gradient.addColorStop(0, '#111111');
-      gradient.addColorStop(0.5, '#0a0a0a');
-      gradient.addColorStop(1, baseColor);
+      gradient.addColorStop(0, '#0a0712');
+      gradient.addColorStop(0.5, resolveCssVars('hsl(var(--brand-dark))'));
+      gradient.addColorStop(1, resolveCssVars(baseColor));
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -113,8 +125,8 @@ export default function DarkVeil({
         // Create gradient for veil layer
         const veilGradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
         const opacity = 0.03 - layer * 0.008;
-        veilGradient.addColorStop(0, `rgba(217, 44, 58, ${opacity})`);
-        veilGradient.addColorStop(0.5, `rgba(247, 168, 13, ${opacity * 0.5})`);
+        veilGradient.addColorStop(0, `rgba(6, 0, 16, ${opacity})`);
+        veilGradient.addColorStop(0.5, `rgba(6, 0, 16, ${opacity * 0.5})`);
         veilGradient.addColorStop(1, 'transparent');
 
         ctx.fillStyle = veilGradient;
@@ -125,12 +137,24 @@ export default function DarkVeil({
     const drawParticles = () => {
       const { x: mouseX, y: mouseY, active } = mouseRef.current;
 
-      // Helper function to convert hex to rgba
-      const hexToRgba = (hex, alpha) => {
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
-        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+      // Helper to convert color (hex or hsl(var(...))) to a CSS color with alpha
+      const colorWithAlpha = (color, alpha) => {
+        if (!color) return `rgba(6,0,16,${alpha})`;
+        const resolved = resolveCssVars(color);
+        if (resolved.startsWith('#')) {
+          const r = parseInt(resolved.slice(1, 3), 16);
+          const g = parseInt(resolved.slice(3, 5), 16);
+          const b = parseInt(resolved.slice(5, 7), 16);
+          return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        }
+        // For hsl(...) forms, use the newer CSS syntax with slash alpha when possible
+        if (resolved.startsWith('hsl')) {
+          if (resolved.includes('/')) {
+            return resolved.replace(/\/[^)]*\)/, `/${alpha})`);
+          }
+          return resolved.replace(/\)$/, ` / ${alpha})`);
+        }
+        return resolved;
       };
 
       particlesRef.current.forEach((particle) => {
@@ -173,8 +197,8 @@ export default function DarkVeil({
           particle.y,
           glowSize
         );
-        particleGradient.addColorStop(0, hexToRgba(particle.color, pulseOpacity));
-        particleGradient.addColorStop(0.4, hexToRgba(particle.color, pulseOpacity * 0.3));
+        particleGradient.addColorStop(0, colorWithAlpha(particle.color, pulseOpacity));
+        particleGradient.addColorStop(0.4, colorWithAlpha(particle.color, pulseOpacity * 0.3));
         particleGradient.addColorStop(1, 'transparent');
 
         ctx.fillStyle = particleGradient;
@@ -183,7 +207,7 @@ export default function DarkVeil({
         ctx.fill();
 
         // Draw core
-        ctx.fillStyle = hexToRgba(particle.color, Math.min(1, pulseOpacity + 0.3));
+        ctx.fillStyle = colorWithAlpha(particle.color, Math.min(1, pulseOpacity + 0.3));
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fill();
@@ -194,9 +218,9 @@ export default function DarkVeil({
       if (!mouseRef.current.active) return;
 
       const { x, y } = mouseRef.current;
-      const glowGradient = ctx.createRadialGradient(x, y, 0, x, y, 200);
-      glowGradient.addColorStop(0, 'rgba(217, 44, 58, 0.1)');
-      glowGradient.addColorStop(0.3, 'rgba(247, 168, 13, 0.05)');
+        const glowGradient = ctx.createRadialGradient(x, y, 0, x, y, 200);
+      glowGradient.addColorStop(0, 'rgba(6, 0, 16, 0.1)');
+      glowGradient.addColorStop(0.3, 'rgba(6, 0, 16, 0.05)');
       glowGradient.addColorStop(1, 'transparent');
 
       ctx.fillStyle = glowGradient;
@@ -223,7 +247,7 @@ export default function DarkVeil({
           if (distSquared < 10000) { // 100 * 100
             const dist = Math.sqrt(distSquared);
             const opacity = (1 - dist / 100) * 0.15;
-            ctx.strokeStyle = `rgba(217, 44, 58, ${opacity})`;
+            ctx.strokeStyle = `rgba(6, 0, 16, ${opacity})`;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
