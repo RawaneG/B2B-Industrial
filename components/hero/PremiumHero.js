@@ -199,22 +199,46 @@ export default function PremiumHero({
     controls.start('visible');
   }, [controls]);
 
+  // Hydration-safe mobile detection
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => {
+      if (typeof window !== 'undefined') {
+        setIsMobile(/Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+      }
+    };
+    checkMobile();
+  }, []);
+
+  // Mobile background style
+  const mobileBg = isMobile
+    ? {
+      background: 'radial-gradient(ellipse at 60% 40%, #a18aff 0%, #060010 80%)',
+      backgroundColor: '#060010',
+    }
+    : {};
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Light Pillar Background */}
-      <div className="absolute inset-0 z-0">
-        <LightPillar
-          topColor="#D92C3A"
-          bottomColor="#FF6B7A"
-          intensity={0.8}
-          rotationSpeed={0.2}
-          glowAmount={0.008}
-          pillarWidth={2.5}
-          pillarHeight={0.5}
-          noiseIntensity={0.3}
-          mixBlendMode="screen"
-        />
-      </div>
+    <section
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={mobileBg}
+    >
+      {/* Light Pillar Background (desktop only) */}
+      {!isMobile && (
+        <div className="absolute inset-0 z-0">
+          <LightPillar
+            topColor="#D92C3A"
+            bottomColor="#FF6B7A"
+            intensity={0.8}
+            rotationSpeed={0.2}
+            glowAmount={0.008}
+            pillarWidth={2.5}
+            pillarHeight={0.5}
+            noiseIntensity={0.3}
+            mixBlendMode="screen"
+          />
+        </div>
+      )}
 
       {/* Gradient Overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70 z-[1]" />
